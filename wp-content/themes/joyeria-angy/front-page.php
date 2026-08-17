@@ -7,49 +7,65 @@
 
 get_header(); ?>
 
-<!-- 1. HERO SECTION PRINCIPAL -->
-<section class="hero-section">
+<!-- 1. HERO SECTION EDITORIAL (ESTÉTICA VERAE) -->
+<section class="hero-editorial">
     <div class="container">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <i class="fa-solid fa-gem" style="color: #38bdf8;"></i> Colección Exclusiva 2026
-            </div>
-            <h1 class="hero-title text-gradient-silver">
-                Elegancia Eterna en Plata Ley .925
-            </h1>
-            <p class="hero-desc">
-                Descubre piezas de alta joyería artesanal y acero quirúrgico diseñadas para brillar siempre. Certificado de autenticidad, acabados de espejo y empaque de lujo incluido.
-            </p>
-            <div class="hero-cta-group">
-                <a href="<?php echo esc_url( home_url( '/tienda' ) ); ?>" class="btn btn-primary">
-                    <i class="fa-solid fa-sparkles"></i> Ver Colección Completa
-                </a>
-                <a href="#medidor-tallas" class="btn btn-outline-silver open-ring-sizer-btn">
-                    <i class="fa-solid fa-ruler-combined"></i> Medir mi Talla
-                </a>
+        <div class="hero-editorial-grid">
+            
+            <!-- Lado Izquierdo: Textos y Botones Píldora -->
+            <div class="hero-text-side">
+                <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(212, 163, 115, 0.12); border: 1px solid var(--border-gold); padding: 0.35rem 1rem; border-radius: var(--radius-full); font-size: 0.8rem; color: #f3e9dc; margin-bottom: 1.5rem;">
+                    <span class="top-badge-pulse"></span> Colección Exclusiva 2026 • Plata Ley .925
+                </div>
+                <h1 class="hero-editorial-title">
+                    Elegance On<br>Your Terms.
+                </h1>
+                <p class="hero-editorial-desc">
+                    Piezas de alta joyería en auténtica Plata Esterlina Ley .925 y Acero Quirúrgico 316L, esculpidas con acabados de espejo y gemas de brillo eterno para elevar tu estilo diario.
+                </p>
+                <div class="hero-pill-group">
+                    <a href="<?php echo esc_url( home_url( '/tienda' ) ); ?>" class="btn btn-primary">
+                        <i class="fa-solid fa-sparkles"></i> Descubrir Colección
+                    </a>
+                    <a href="#medidor-tallas" class="btn btn-outline-silver open-ring-sizer-btn">
+                        <i class="fa-solid fa-ruler-combined"></i> Medir mi Talla
+                    </a>
+                </div>
             </div>
 
-            <!-- Estadísticas de Confianza -->
-            <div class="hero-stats">
-                <div class="hero-stat-item">
-                    <h4>.925</h4>
-                    <p>Plata Pura Certificada</p>
+            <!-- Lado Derecho: Retrato de Modelo y Widget Flotante Glassmorphism -->
+            <div class="hero-visual-side">
+                <div class="hero-model-container">
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/hero-model.jpg' ); ?>" alt="Joyería Angy Colección Editorial Plata .925">
                 </div>
-                <div class="hero-stat-item">
-                    <h4>+12,000</h4>
-                    <p>Clientes Enamorados</p>
-                </div>
-                <div class="hero-stat-item">
-                    <h4>100%</h4>
-                    <p>Garantía de Brillo</p>
+
+                <!-- Widget Flotante Glassmorphism (Como en la Imagen de Referencia) -->
+                <div class="hero-floating-widget">
+                    <div class="widget-product-row">
+                        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/anillo-solitario.jpg' ); ?>" alt="Anillo Solitario" class="widget-thumb">
+                        <div>
+                            <h5 class="widget-p-title">Solitario Diamante .925</h5>
+                            <span class="widget-p-meta"><i class="fa-solid fa-star" style="color: #d4a373;"></i> 4.9 • $1,290 MXN</span>
+                        </div>
+                    </div>
+                    <div class="widget-stats-grid">
+                        <div class="widget-stat-box">
+                            <strong>+25k</strong>
+                            <span>Clientes</span>
+                        </div>
+                        <div class="widget-stat-box">
+                            <strong>.925</strong>
+                            <span>Quintada</span>
+                        </div>
+                        <div class="widget-stat-box">
+                            <strong>100%</strong>
+                            <span>Garantía</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
-    </div>
-
-    <!-- Imagen de fondo Hero con efecto luminoso -->
-    <div class="hero-bg-media">
-        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/hero-banner.jpg' ); ?>" alt="Joyería Angy Plata Ley .925">
     </div>
 </section>
 
