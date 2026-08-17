@@ -1,12 +1,11 @@
 <?php
 /**
  * Template Name: Portal de Administración e Inventario
- * Description: Portal independiente con login seguro para gestión de catálogo y existencias de Joyería Angy
+ * Description: Portal independiente con login seguro y módulo de usuarios y roles de Joyería Angy
  *
  * @package Joyeria_Angy
  */
 
-// Si no está definido ABSPATH
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -35,9 +34,10 @@ if ( ! defined( 'ABSPATH' ) ) {
         </div>
 
         <div style="background: rgba(212, 163, 115, 0.08); border: 1px solid var(--border-gold); padding: 0.85rem; border-radius: var(--radius-sm); font-size: 0.82rem; margin-bottom: 1.5rem; text-align: left; color: #f3e9dc;">
-            <strong><i class="fa-solid fa-key" style="color: var(--color-gold-bronze);"></i> Accesos Demo:</strong><br>
-            • Usuario: <code style="color:#ffffff; background:rgba(0,0,0,0.3); padding:1px 5px; border-radius:3px;">admin@joyeriaangy.com</code> o <code style="color:#ffffff; background:rgba(0,0,0,0.3); padding:1px 5px; border-radius:3px;">admin</code><br>
-            • Contraseña: <code style="color:#ffffff; background:rgba(0,0,0,0.3); padding:1px 5px; border-radius:3px;">angy2026</code>
+            <strong><i class="fa-solid fa-key" style="color: var(--color-gold-bronze);"></i> Cuentas Demo Activas:</strong><br>
+            • <strong>Super Admin:</strong> <code style="color:#ffffff; background:rgba(0,0,0,0.3); padding:1px 5px; border-radius:3px;">admin@joyeriaangy.com</code> (Clave: <code>angy2026</code>)<br>
+            • <strong>Gerente Almacén:</strong> <code style="color:#ffffff; background:rgba(0,0,0,0.3); padding:1px 5px; border-radius:3px;">almacen@joyeriaangy.com</code> (Clave: <code>almacen2026</code>)<br>
+            • <strong>Asesor Ventas:</strong> <code style="color:#ffffff; background:rgba(0,0,0,0.3); padding:1px 5px; border-radius:3px;">ventas@joyeriaangy.com</code> (Clave: <code>ventas2026</code>)
         </div>
 
         <div id="loginErrorMsg" class="login-error-msg"></div>
@@ -55,8 +55,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; margin-top: -0.25rem;">
                 <label style="display: flex; align-items: center; gap: 0.45rem; color: var(--color-silver-mid); cursor: pointer;">
-                    <input type="checkbox" id="rememberSession" checked> Recordar sesión
+                    <input type="checkbox" id="rememberSession" checked> Recordar en este dispositivo
                 </label>
+                <a href="javascript:void(0)" onclick="alert('Usa las credenciales de demo mostradas arriba.');" style="color: var(--color-gold-bronze); text-decoration: underline;">¿Olvidaste clave?</a>
             </div>
 
             <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
@@ -73,14 +74,14 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
 </div>
 
-<!-- 2. DASHBOARD DE CONTROL DE INVENTARIO Y ERP -->
+<!-- 2. DASHBOARD DE CONTROL DE INVENTARIO Y ERP (AUTENTICADO) -->
 <div id="adminDashboardScreen" style="display: none;">
     
     <header class="admin-portal-header">
         <div class="container">
             <div class="site-brand" style="margin: 0;">
                 <span class="brand-name" style="font-size: 1.6rem;">Joyería Angy</span>
-                <span class="brand-subtitle" style="font-size: 0.58rem; color:var(--color-gold-bronze);"><i class="fa-solid fa-boxes-stacked"></i> Sistema ERP & Inventario</span>
+                <span class="brand-subtitle" style="font-size: 0.58rem; color:var(--color-gold-bronze);"><i class="fa-solid fa-boxes-stacked"></i> Sistema ERP & Gestión</span>
             </div>
 
             <div style="display: flex; align-items: center; gap: 1.25rem;">
@@ -89,10 +90,10 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </a>
 
                 <div class="admin-user-profile">
-                    <div class="admin-avatar">JA</div>
+                    <div class="admin-avatar" id="headerAdminAvatar">JA</div>
                     <div style="font-size: 0.85rem; line-height: 1.2;">
-                        <strong style="color: #ffffff; display: block;">Administrador Angy</strong>
-                        <span style="color: #4ade80; font-size: 0.75rem;">● En Línea</span>
+                        <strong style="color: #ffffff; display: block;" id="headerAdminName">Angy Platero</strong>
+                        <span style="color: var(--color-gold-bronze); font-size: 0.72rem;" id="headerAdminRole">Super Administrador</span>
                     </div>
                 </div>
 
@@ -106,100 +107,293 @@ if ( ! defined( 'ABSPATH' ) ) {
     <main class="admin-section">
         <div class="container">
             
-            <div class="admin-header-row">
-                <div>
-                    <span class="section-subtitle"><i class="fa-solid fa-shield-halved" style="color:var(--color-gold-bronze);"></i> Almacén Central</span>
-                    <h1 class="text-gradient-silver" style="font-size: 2.2rem;">Control de Inventario y Catálogo</h1>
-                    <p style="font-size: 0.95rem;">Gestiona existencias de Plata Ley .925, piezas en acero quirúrgico, SKU y precios.</p>
+            <div class="admin-subnav-tabs">
+                <button class="admin-subnav-btn active" id="tabBtn-inventario" onclick="switchAdminTab('inventario')">
+                    <i class="fa-solid fa-boxes-stacked"></i> Control de Inventario & Joyas
+                </button>
+                <button class="admin-subnav-btn" id="tabBtn-usuarios" onclick="switchAdminTab('usuarios')">
+                    <i class="fa-solid fa-users-gear"></i> Gestión de Usuarios & Roles
+                </button>
+            </div>
+
+            <!-- PESTAÑA 1: INVENTARIO -->
+            <div id="tabContent-inventario" class="admin-tab-content">
+                <div class="admin-header-row">
+                    <div>
+                        <span class="section-subtitle"><i class="fa-solid fa-shield-halved" style="color:var(--color-gold-bronze);"></i> Almacén Central</span>
+                        <h1 class="text-gradient-silver" style="font-size: 2.2rem;">Control de Inventario y Catálogo</h1>
+                        <p style="font-size: 0.95rem;">Gestiona stock físico de Plata Ley .925, piezas en acero quirúrgico, SKU y precios.</p>
+                    </div>
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                        <button class="btn btn-primary btn-sm" onclick="openAddProductModal()">
+                            <i class="fa-solid fa-plus"></i> Registrar Nueva Joya
+                        </button>
+                        <button class="btn btn-outline-silver btn-sm" onclick="exportInventoryJSON()">
+                            <i class="fa-solid fa-download"></i> Exportar Inventario (JSON)
+                        </button>
+                    </div>
                 </div>
-                <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                    <button class="btn btn-primary btn-sm" onclick="openAddProductModal()">
-                        <i class="fa-solid fa-plus"></i> Registrar Nueva Joya
-                    </button>
-                    <button class="btn btn-outline-silver btn-sm" onclick="exportInventoryJSON()">
-                        <i class="fa-solid fa-download"></i> Exportar Inventario (JSON)
-                    </button>
+
+                <div class="admin-kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon-box"><i class="fa-solid fa-gem"></i></div>
+                        <div class="kpi-data">
+                            <h3 id="kpiTotalProducts">5</h3>
+                            <p>Modelos Registrados</p>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon-box" style="border-color:#4ade80; background:rgba(74,222,128,0.1); color:#4ade80;"><i class="fa-solid fa-boxes-stacked"></i></div>
+                        <div class="kpi-data">
+                            <h3 id="kpiTotalUnits">50 pzas</h3>
+                            <p>Total Piezas en Stock</p>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon-box" style="border-color:#fbbf24; background:rgba(251,191,36,0.1); color:#fbbf24;"><i class="fa-solid fa-sack-dollar"></i></div>
+                        <div class="kpi-data">
+                            <h3 id="kpiTotalValuation">$65,920.00</h3>
+                            <p>Valuación de Almacén</p>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon-box" style="border-color:#f87171; background:rgba(248,113,113,0.1); color:#f87171;"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div class="kpi-data">
+                            <h3 id="kpiLowStockAlerts">1</h3>
+                            <p>Stock Bajo (&le; 3 pzas)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inventory-toolbar">
+                    <div style="position:relative; flex-grow:1; max-width:320px;">
+                        <i class="fa-solid fa-magnifying-glass search-icon-inside"></i>
+                        <input type="text" placeholder="Buscar por joya o SKU..." class="search-input-header" id="inventorySearchInput" style="width:100%;">
+                    </div>
+                    <div class="inventory-filters">
+                        <select class="admin-select" id="inventoryCategoryFilter">
+                            <option value="all">Todas las Categorías</option>
+                            <option value="anillos">Anillos de Compromiso</option>
+                            <option value="collares">Collares & Dijes</option>
+                            <option value="pulseras">Pulseras Finas</option>
+                            <option value="aretes">Aretes & Arracadas</option>
+                            <option value="parejas">Joyería para Parejas</option>
+                        </select>
+                        <select class="admin-select" id="inventoryStockFilter">
+                            <option value="all">Todo el Estado de Stock</option>
+                            <option value="in">En Stock (> 3)</option>
+                            <option value="low">Stock Bajo (&le; 3)</option>
+                            <option value="out">Agotados (0)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="inventory-table-container">
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>Joya & Código SKU</th>
+                                <th>Categoría</th>
+                                <th>Metal / Pureza</th>
+                                <th>Precio ($ MXN)</th>
+                                <th>Control de Stock</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventoryTableBody"></tbody>
+                    </table>
                 </div>
             </div>
 
-            <div class="admin-kpi-grid">
-                <div class="kpi-card">
-                    <div class="kpi-icon-box"><i class="fa-solid fa-gem"></i></div>
-                    <div class="kpi-data">
-                        <h3 id="kpiTotalProducts">5</h3>
-                        <p>Modelos Registrados</p>
+            <!-- PESTAÑA 2: USUARIOS Y ROLES -->
+            <div id="tabContent-usuarios" class="admin-tab-content" style="display: none;">
+                <div class="admin-header-row">
+                    <div>
+                        <span class="section-subtitle"><i class="fa-solid fa-users-gear" style="color:var(--color-gold-bronze);"></i> Control de Accesos</span>
+                        <h1 class="text-gradient-silver" style="font-size: 2.2rem;">Gestión de Usuarios y Roles</h1>
+                        <p style="font-size: 0.95rem;">Crea cuentas de colaboradores, asigna roles de permisos y gestiona el acceso seguro al ERP.</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-sm" onclick="openAddUserModal()">
+                            <i class="fa-solid fa-user-plus"></i> Registrar Nuevo Usuario
+                        </button>
                     </div>
                 </div>
 
-                <div class="kpi-card">
-                    <div class="kpi-icon-box" style="border-color:#4ade80; background:rgba(74,222,128,0.1); color:#4ade80;"><i class="fa-solid fa-boxes-stacked"></i></div>
-                    <div class="kpi-data">
-                        <h3 id="kpiTotalUnits">50 pzas</h3>
-                        <p>Total Piezas en Stock</p>
+                <div class="inventory-toolbar">
+                    <div style="position:relative; flex-grow:1; max-width:320px;">
+                        <i class="fa-solid fa-magnifying-glass search-icon-inside"></i>
+                        <input type="text" placeholder="Buscar por nombre, correo o @usuario..." class="search-input-header" id="usersSearchInput" style="width:100%;">
+                    </div>
+                    <div class="inventory-filters">
+                        <select class="admin-select" id="usersRoleFilter">
+                            <option value="all">Todos los Roles</option>
+                            <option value="superadmin">Super Administradores</option>
+                            <option value="manager">Gerentes de Almacén</option>
+                            <option value="sales">Asesores de Ventas</option>
+                            <option value="auditor">Auditores Financieros</option>
+                        </select>
                     </div>
                 </div>
 
-                <div class="kpi-card">
-                    <div class="kpi-icon-box" style="border-color:#fbbf24; background:rgba(251,191,36,0.1); color:#fbbf24;"><i class="fa-solid fa-sack-dollar"></i></div>
-                    <div class="kpi-data">
-                        <h3 id="kpiTotalValuation">$65,920.00</h3>
-                        <p>Valuación de Almacén</p>
-                    </div>
+                <div class="inventory-table-container">
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Colaborador / Nombre</th>
+                                <th>Correo / Usuario</th>
+                                <th>Rol Asignado</th>
+                                <th>Estado de Acceso</th>
+                                <th>Fecha Alta</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody"></tbody>
+                    </table>
                 </div>
-
-                <div class="kpi-card">
-                    <div class="kpi-icon-box" style="border-color:#f87171; background:rgba(248,113,113,0.1); color:#f87171;"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                    <div class="kpi-data">
-                        <h3 id="kpiLowStockAlerts">1</h3>
-                        <p>Stock Bajo (&le; 3 pzas)</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="inventory-toolbar">
-                <div style="position:relative; flex-grow:1; max-width:320px;">
-                    <i class="fa-solid fa-magnifying-glass search-icon-inside"></i>
-                    <input type="text" placeholder="Buscar por joya o SKU..." class="search-input-header" id="inventorySearchInput" style="width:100%;">
-                </div>
-
-                <div class="inventory-filters">
-                    <select class="admin-select" id="inventoryCategoryFilter">
-                        <option value="all">Todas las Categorías</option>
-                        <option value="anillos">Anillos de Compromiso</option>
-                        <option value="collares">Collares & Dijes</option>
-                        <option value="pulseras">Pulseras Finas</option>
-                        <option value="aretes">Aretes & Arracadas</option>
-                        <option value="parejas">Joyería para Parejas</option>
-                    </select>
-
-                    <select class="admin-select" id="inventoryStockFilter">
-                        <option value="all">Todo el Estado de Stock</option>
-                        <option value="in">En Stock (> 3)</option>
-                        <option value="low">Stock Bajo (&le; 3)</option>
-                        <option value="out">Agotados (0)</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="inventory-table-container">
-                <table class="inventory-table">
-                    <thead>
-                        <tr>
-                            <th>Foto</th>
-                            <th>Joya & Código SKU</th>
-                            <th>Categoría</th>
-                            <th>Metal / Pureza</th>
-                            <th>Precio ($ MXN)</th>
-                            <th>Control de Stock</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="inventoryTableBody"></tbody>
-                </table>
             </div>
 
         </div>
     </main>
+</div>
+
+<!-- MODAL USUARIO -->
+<div class="modal-overlay" id="userAdminModal">
+    <div class="modal-box" style="max-width: 580px;">
+        <button class="close-modal-btn" id="closeUserModalBtn"><i class="fa-solid fa-xmark"></i></button>
+        <div style="margin-bottom: 1.5rem;">
+            <span class="section-subtitle" style="color:var(--color-gold-bronze);"><i class="fa-solid fa-user-shield"></i> Control de Accesos ERP</span>
+            <h2 class="text-gradient-silver" id="userModalTitle" style="font-size: 1.7rem;">Registrar Nuevo Usuario</h2>
+        </div>
+
+        <form id="userAdminForm" style="display:flex; flex-direction:column; gap:1.1rem;">
+            <input type="hidden" id="editUserId" value="">
+            <div>
+                <label style="display:block; font-size:0.85rem; color:var(--color-silver-mid); margin-bottom:0.35rem;">Nombre Completo *</label>
+                <input type="text" id="formUserName" class="login-input" style="border-radius: var(--radius-sm);" placeholder="Ej. Ana Lucía Platero" required>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+                <div>
+                    <label style="display:block; font-size:0.85rem; color:var(--color-silver-mid); margin-bottom:0.35rem;">Correo Electrónico *</label>
+                    <input type="email" id="formUserEmail" class="login-input" style="border-radius: var(--radius-sm);" placeholder="ana@joyeriaangy.com" required>
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.85rem; color:var(--color-silver-mid); margin-bottom:0.35rem;">Nombre de Usuario *</label>
+                    <input type="text" id="formUserUsername" class="login-input" style="border-radius: var(--radius-sm);" placeholder="ana.platero" required>
+                </div>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+                <div>
+                    <label style="display:block; font-size:0.85rem; color:var(--color-silver-mid); margin-bottom:0.35rem;">Rol Asignado *</label>
+                    <select id="formUserRole" class="login-input" style="border-radius: var(--radius-sm); background:#140e0b; color:#ffffff;" required>
+                        <option value="superadmin">👑 Super Administrador (Acceso Total)</option>
+                        <option value="manager">📦 Gerente de Almacén (Inventario & Stock)</option>
+                        <option value="sales">💬 Asesor de Ventas (Catálogo & WhatsApp)</option>
+                        <option value="auditor">📊 Auditor Financiero (Reportes & Métricas)</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.85rem; color:var(--color-silver-mid); margin-bottom:0.35rem;">Estado *</label>
+                    <select id="formUserStatus" class="login-input" style="border-radius: var(--radius-sm); background:#140e0b; color:#ffffff;" required>
+                        <option value="active">● Activo (Permite Login)</option>
+                        <option value="suspended">⛔ Suspendido (Bloquear Acceso)</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.35rem;">
+                    <label style="font-size:0.85rem; color:var(--color-silver-mid); margin:0;">Contraseña de Acceso *</label>
+                    <button type="button" class="top-bar-link" onclick="generateRandomPassword()" style="font-size:0.75rem; color:var(--color-gold-bronze); background:none; border:none; cursor:pointer;">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Generar Clave
+                    </button>
+                </div>
+                <input type="text" id="formUserPass" class="login-input" style="border-radius: var(--radius-sm);" placeholder="Ingresa contraseña..." required>
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:0.5rem;">
+                <button type="button" class="btn btn-outline-silver btn-sm" onclick="document.getElementById('closeUserModalBtn').click();">Cancelar</button>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-user-check"></i> Guardar Usuario</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL PRODUCTO -->
+<div class="modal-overlay" id="productAdminModal">
+    <div class="modal-box" style="max-width: 680px;">
+        <button class="close-modal-btn" id="closeProductModalBtn"><i class="fa-solid fa-xmark"></i></button>
+        <div style="margin-bottom: 1.5rem;">
+            <span class="section-subtitle" style="color:var(--color-gold-bronze);"><i class="fa-solid fa-gem"></i> Gestión de Almacén</span>
+            <h2 class="text-gradient-silver" id="productModalTitle" style="font-size: 1.7rem;">Registrar Nueva Joya</h2>
+        </div>
+        <form id="productAdminForm" style="display:flex; flex-direction:column; gap:1.1rem;">
+            <input type="hidden" id="editProductId" value="">
+            <div>
+                <label style="display:block; font-size:0.85rem; color:var(--color-silver-mid); margin-bottom:0.35rem;">Nombre / Título de la Joya *</label>
+                <input type="text" id="formTitle" class="login-input" style="border-radius: var(--radius-sm);" placeholder="Ej. Anillo Solitario Circonia 5A Plata .925" required>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+                <div>
+                    <label style="display:block; font-size:0.85rem; color:var(--color-silver-mid); margin-bottom:0.35rem;">Código SKU Único *</label>
+                    <input type="text" id="formSku" class="login-input" style="border-radius: var(--radius-sm); text-transform:uppercase;" placeholder="ANGY-PL-006" required>
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.85rem; color:var(--color-silver-mid); margin-bottom:0.35rem;">Categoría *</label>
+                    <select id="formCategory" class="login-input" style="border-radius: var(--radius-sm); background:#140e0b; color:#ffffff;" required>
+                        <option value="anillos">Anillos de Compromiso / Solitarios</option>
+                        <option value="collares">Collares & Dijes con Cristal</option>
+                        <option value="pulseras">Pulseras & Brazaletes</option>
+                        <option value="aretes">Aretes & Arracadas</option>
+                        <option value="parejas">Joyería para Parejas & Dúos</option>
+                        <option value="acero">Acero Inoxidable 316L</option>
+                    </select>
+                </div>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+                <div>
+                    <label style="display:block; font-size:0.85rem; color:var(--color-silver-mid); margin-bottom:0.35rem;">Metal / Pureza *</label>
+                    <input type="text" id="formMetal" class="login-input" style="border-radius: var(--radius-sm);" placeholder="Plata Ley .925 Quintada" value="Plata Ley .925 Quintada" required>
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.85rem; color:var(--color-silver-mid); margin-bottom:0.35rem;">Distintivo Promocional</label>
+                    <input type="text" id="formBadge" class="login-input" style="border-radius: var(--radius-sm);" placeholder="Nuevo Lanzamiento, Más Vendido" value="Nuevo Lanzamiento">
+                </div>
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:1rem;">
+                <div>
+                    <label style="display:block; font-size:0.85rem; color:var(--color-silver-mid); margin-bottom:0.35rem;">Precio Venta ($ MXN) *</label>
+                    <input type="number" id="formPrice" class="login-input" style="border-radius: var(--radius-sm);" placeholder="1290" required min="1">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.85rem; color:var(--color-silver-mid); margin-bottom:0.35rem;">Precio Regular ($ MXN)</label>
+                    <input type="number" id="formOldPrice" class="login-input" style="border-radius: var(--radius-sm);" placeholder="1650">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.85rem; color:var(--color-silver-mid); margin-bottom:0.35rem;">Stock Inicial *</label>
+                    <input type="number" id="formStock" class="login-input" style="border-radius: var(--radius-sm);" placeholder="10" required min="0">
+                </div>
+            </div>
+            <div>
+                <label style="display:block; font-size:0.85rem; color:var(--color-silver-mid); margin-bottom:0.35rem;">Fotografía de la Joya *</label>
+                <div style="display:flex; gap:0.5rem;">
+                    <select id="formImagePreset" class="login-input" style="border-radius: var(--radius-sm); background:#140e0b; color:#ffffff; width:220px;" onchange="if(this.value) document.getElementById('formImage').value = this.value;">
+                        <option value="">Seleccionar foto estudio...</option>
+                        <option value="assets/images/anillo-solitario.jpg">Anillo Solitario Diamante</option>
+                        <option value="assets/images/collar-corazon.jpg">Collar Corazón Zafiro</option>
+                        <option value="assets/images/pulsera-eslabones.jpg">Pulsera Tennis Eslabón</option>
+                        <option value="assets/images/aretes-arracadas.jpg">Arracadas Micro-Pavé</option>
+                        <option value="assets/images/anillos-pareja.jpg">Dúo Anillos Pareja</option>
+                        <option value="assets/images/empaque-certificado.jpg">Empaque & Certificado</option>
+                    </select>
+                    <input type="text" id="formImage" class="login-input" style="border-radius: var(--radius-sm); flex-grow:1;" placeholder="Ruta o URL de imagen" value="assets/images/anillo-solitario.jpg" required>
+                </div>
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:0.5rem;">
+                <button type="button" class="btn btn-outline-silver btn-sm" onclick="document.getElementById('closeProductModalBtn').click();">Cancelar</button>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Guardar en Almacén</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <div class="toast-container" id="toastContainer"></div>

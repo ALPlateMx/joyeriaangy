@@ -1,32 +1,65 @@
 /**
- * JOYERÍA ANGY - SISTEMA DE AUTENTICACIÓN Y PORTAL ERP INDEPENDIENTE (ADMIN.JS)
- * Control de Acceso Seguro, Sesión de Administrador y Gestión de Inventario
+ * JOYERÍA ANGY - SISTEMA DE AUTENTICACIÓN, ROLES & ERP INDEPENDIENTE (ADMIN.JS)
+ * Control de Acceso Seguro, Creación de Usuarios, Asignación de Roles y Gestión de Inventario
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Credenciales Oficiales de Demostración
-  const VALID_USER = 'admin@joyeriaangy.com';
-  const VALID_USER_SHORT = 'admin';
-  const VALID_PASS = 'angy2026';
-  const VALID_PASS_ALT = 'admin123';
+  // 1. Usuarios y Roles Iniciales de Joyería Angy ERP
+  const DEFAULT_USERS = [
+    {
+      id: 'usr-1',
+      name: 'Angy Platero',
+      email: 'admin@joyeriaangy.com',
+      username: 'admin',
+      pass: 'angy2026',
+      role: 'superadmin',
+      roleLabel: 'Super Administrador',
+      status: 'active',
+      createdAt: '2026-01-10'
+    },
+    {
+      id: 'usr-2',
+      name: 'Roberto Mendoza',
+      email: 'almacen@joyeriaangy.com',
+      username: 'almacen',
+      pass: 'almacen2026',
+      role: 'manager',
+      roleLabel: 'Gerente de Almacén',
+      status: 'active',
+      createdAt: '2026-02-01'
+    },
+    {
+      id: 'usr-3',
+      name: 'Sofía Joyas',
+      email: 'ventas@joyeriaangy.com',
+      username: 'ventas',
+      pass: 'ventas2026',
+      role: 'sales',
+      roleLabel: 'Asesor de Ventas',
+      status: 'active',
+      createdAt: '2026-02-15'
+    },
+    {
+      id: 'usr-4',
+      name: 'Lic. Claudia Morales',
+      email: 'auditoria@joyeriaangy.com',
+      username: 'auditoria',
+      pass: 'auditor2026',
+      role: 'auditor',
+      roleLabel: 'Auditor Financiero',
+      status: 'active',
+      createdAt: '2026-03-01'
+    }
+  ];
 
-  // Elementos DOM de Login y Dashboard
-  const loginScreen = document.getElementById('adminLoginScreen');
-  const dashboardScreen = document.getElementById('adminDashboardScreen');
-  const loginForm = document.getElementById('adminLoginForm');
-  const userInput = document.getElementById('loginUsername');
-  const passInput = document.getElementById('loginPassword');
-  const rememberCheckbox = document.getElementById('rememberSession');
-  const errorMsg = document.getElementById('loginErrorMsg');
-  const logoutBtn = document.getElementById('adminLogoutBtn');
+  // Cargar usuarios del Storage o inicializar
+  let users = JSON.parse(localStorage.getItem('joyeria_angy_admin_users'));
+  if (!users || !Array.isArray(users) || users.length === 0) {
+    users = DEFAULT_USERS;
+    localStorage.setItem('joyeria_angy_admin_users', JSON.stringify(users));
+  }
 
-  // Elementos del Modal de Joyas
-  const productModal = document.getElementById('productAdminModal');
-  const closeProductModalBtn = document.getElementById('closeProductModalBtn');
-  const productForm = document.getElementById('productAdminForm');
-  const toastContainer = document.getElementById('toastContainer');
-
-  // Catálogo Base Inicial
+  // 2. Catálogo Base Inicial de Inventario
   const DEFAULT_PRODUCTS = [
     {
       id: 'prod-1',
@@ -105,54 +138,105 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ];
 
-  // Cargar base de datos compartida con la tienda
   let products = JSON.parse(localStorage.getItem('joyeria_angy_products_inventory'));
   if (!products || !Array.isArray(products) || products.length === 0) {
     products = DEFAULT_PRODUCTS;
     localStorage.setItem('joyeria_angy_products_inventory', JSON.stringify(products));
   }
 
+  // Elementos DOM
+  const loginScreen = document.getElementById('adminLoginScreen');
+  const dashboardScreen = document.getElementById('adminDashboardScreen');
+  const loginForm = document.getElementById('adminLoginForm');
+  const userInput = document.getElementById('loginUsername');
+  const passInput = document.getElementById('loginPassword');
+  const rememberCheckbox = document.getElementById('rememberSession');
+  const errorMsg = document.getElementById('loginErrorMsg');
+  const logoutBtn = document.getElementById('adminLogoutBtn');
+
+  // Modales
+  const productModal = document.getElementById('productAdminModal');
+  const closeProductModalBtn = document.getElementById('closeProductModalBtn');
+  const productForm = document.getElementById('productAdminForm');
+
+  const userModal = document.getElementById('userAdminModal');
+  const closeUserModalBtn = document.getElementById('closeUserModalBtn');
+  const userForm = document.getElementById('userAdminForm');
+  const toastContainer = document.getElementById('toastContainer');
+
   function formatCurrency(amount) {
     return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(amount);
   }
 
-  // 1. Verificación de Estado de Autenticación
-  function checkAuthState() {
-    const isAuth = localStorage.getItem('joyeria_angy_admin_auth') === 'true' || 
-                   sessionStorage.getItem('joyeria_angy_admin_auth') === 'true';
+  // 3. Verificación de Autenticación y Carga de Usuario Activo
+  function getActiveUser() {
+    return JSON.parse(localStorage.getItem('joyeria_angy_current_admin')) || 
+           JSON.parse(sessionStorage.getItem('joyeria_angy_current_admin'));
+  }
 
-    if (isAuth) {
-      loginScreen.style.display = 'none';
-      dashboardScreen.style.display = 'block';
+  function checkAuthState() {
+    const activeUser = getActiveUser();
+
+    if (activeUser && activeUser.email) {
+      if (loginScreen) loginScreen.style.display = 'none';
+      if (dashboardScreen) dashboardScreen.style.display = 'block';
+
+      // Actualizar perfil en topbar
+      const avatarEl = document.getElementById('headerAdminAvatar');
+      const nameEl = document.getElementById('headerAdminName');
+      const roleEl = document.getElementById('headerAdminRole');
+
+      if (avatarEl) {
+        const initials = activeUser.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+        avatarEl.textContent = initials || 'JA';
+      }
+      if (nameEl) nameEl.textContent = activeUser.name || 'Administrador';
+      if (roleEl) roleEl.textContent = activeUser.roleLabel || 'Super Administrador';
+
       updateKPIs();
       renderInventoryTable();
+      renderUsersTable();
     } else {
-      loginScreen.style.display = 'flex';
-      dashboardScreen.style.display = 'none';
+      if (loginScreen) loginScreen.style.display = 'flex';
+      if (dashboardScreen) dashboardScreen.style.display = 'none';
     }
   }
 
-  // 2. Procesar Login
+  // 4. Procesar Login
   loginForm?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const user = userInput.value.trim().toLowerCase();
+    const entered = userInput.value.trim().toLowerCase();
     const pass = passInput.value.trim();
 
-    if ((user === VALID_USER || user === VALID_USER_SHORT) && (pass === VALID_PASS || pass === VALID_PASS_ALT)) {
+    const foundUser = users.find(u => 
+      (u.email.toLowerCase() === entered || u.username.toLowerCase() === entered) && u.pass === pass
+    );
+
+    if (foundUser) {
+      if (foundUser.status === 'suspended') {
+        if (errorMsg) {
+          errorMsg.textContent = '⛔ Esta cuenta de usuario se encuentra suspendida por la administración.';
+          errorMsg.style.display = 'block';
+        }
+        return;
+      }
+
       if (errorMsg) errorMsg.style.display = 'none';
       
       const remember = rememberCheckbox?.checked;
       if (remember) {
+        localStorage.setItem('joyeria_angy_current_admin', JSON.stringify(foundUser));
         localStorage.setItem('joyeria_angy_admin_auth', 'true');
       } else {
+        sessionStorage.setItem('joyeria_angy_current_admin', JSON.stringify(foundUser));
         sessionStorage.setItem('joyeria_angy_admin_auth', 'true');
       }
 
-      showToast('🔑 ¡Sesión iniciada con éxito! Bienvenido al ERP de Joyería Angy.');
+      showToast(`🔑 ¡Bienvenido(a), ${foundUser.name}! (${foundUser.roleLabel})`);
       checkAuthState();
     } else {
       if (errorMsg) {
-        errorMsg.textContent = '❌ Usuario o contraseña incorrectos. Verifica tus accesos.';
+        errorMsg.textContent = '❌ Usuario o contraseña incorrectos. Verifica tus credenciales.';
         errorMsg.style.display = 'block';
       }
       passInput.value = '';
@@ -160,8 +244,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 3. Procesar Logout
+  // 5. Logout
   window.adminLogout = function() {
+    localStorage.removeItem('joyeria_angy_current_admin');
+    sessionStorage.removeItem('joyeria_angy_current_admin');
     localStorage.removeItem('joyeria_angy_admin_auth');
     sessionStorage.removeItem('joyeria_angy_admin_auth');
     showToast('🔒 Sesión cerrada con seguridad.');
@@ -170,7 +256,246 @@ document.addEventListener('DOMContentLoaded', () => {
 
   logoutBtn?.addEventListener('click', window.adminLogout);
 
-  // 4. Actualización de KPIs en Tiempo Real
+  // 6. Cambio de Pestañas del Panel Admin
+  window.switchAdminTab = function(tabName) {
+    document.querySelectorAll('.admin-subnav-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.admin-tab-content').forEach(tab => tab.style.display = 'none');
+
+    const btn = document.getElementById(`tabBtn-${tabName}`);
+    const content = document.getElementById(`tabContent-${tabName}`);
+
+    if (btn) btn.classList.add('active');
+    if (content) content.style.display = 'block';
+
+    if (tabName === 'inventario') {
+      renderInventoryTable();
+      updateKPIs();
+    } else if (tabName === 'usuarios') {
+      renderUsersTable();
+    }
+  };
+
+  // 7. Módulo de Gestión de Usuarios & Roles (CRUD)
+  function renderUsersTable() {
+    const tbody = document.getElementById('usersTableBody');
+    if (!tbody) return;
+
+    const q = (document.getElementById('usersSearchInput')?.value || '').toLowerCase().trim();
+    const roleFilter = document.getElementById('usersRoleFilter')?.value || 'all';
+
+    let list = users;
+    if (roleFilter !== 'all') {
+      list = list.filter(u => u.role === roleFilter);
+    }
+    if (q) {
+      list = list.filter(u => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q) || u.username.toLowerCase().includes(q));
+    }
+
+    const roleBadgeClasses = {
+      'superadmin': 'role-superadmin',
+      'manager': 'role-manager',
+      'sales': 'role-sales',
+      'auditor': 'role-auditor'
+    };
+
+    const roleIcons = {
+      'superadmin': 'fa-solid fa-crown',
+      'manager': 'fa-solid fa-boxes-stacked',
+      'sales': 'fa-solid fa-comments-dollar',
+      'auditor': 'fa-solid fa-calculator'
+    };
+
+    if (list.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="6" style="text-align:center; padding: 2.5rem; color:var(--color-silver-mid);">
+            <i class="fa-solid fa-users-slash" style="font-size: 2rem; margin-bottom: 0.5rem; color:var(--color-gold-bronze); display:block;"></i>
+            No se encontraron usuarios registrados con los filtros seleccionados.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    const activeAdmin = getActiveUser();
+
+    tbody.innerHTML = list.map(u => {
+      const initials = u.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+      const isCurrent = activeAdmin && (activeAdmin.id === u.id || activeAdmin.email === u.email);
+      const isSuspended = u.status === 'suspended';
+
+      return `
+        <tr data-id="${u.id}">
+          <td>
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+              <div class="admin-avatar" style="width:34px; height:34px; font-size:0.78rem;">${initials}</div>
+              <div>
+                <div style="font-weight:600; color:#ffffff;">${u.name} ${isCurrent ? '<span style="font-size:0.7rem; color:var(--color-gold-bronze);">(Tú)</span>' : ''}</div>
+                <div style="font-size:0.75rem; color:var(--color-silver-dark);">ID: ${u.id}</div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div style="color:var(--text-main); font-size:0.9rem;">${u.email}</div>
+            <div style="font-size:0.75rem; color:var(--color-silver-mid); font-family:monospace;">@${u.username}</div>
+          </td>
+          <td>
+            <span class="role-badge ${roleBadgeClasses[u.role] || 'role-superadmin'}">
+              <i class="${roleIcons[u.role] || 'fa-solid fa-shield-halved'}"></i> ${u.roleLabel}
+            </span>
+          </td>
+          <td>
+            <span class="${isSuspended ? 'status-badge-suspended' : 'status-badge-active'}">
+              ${isSuspended ? '<i class="fa-solid fa-ban"></i> Suspendido' : '<i class="fa-solid fa-circle-check"></i> Activo'}
+            </span>
+          </td>
+          <td style="font-size:0.82rem; color:var(--color-silver-dark);">${u.createdAt || '2026-01-01'}</td>
+          <td>
+            <div style="display:flex; gap:0.4rem;">
+              <button class="icon-action-btn" style="width:32px; height:32px; font-size:0.78rem;" onclick="openEditUserModal('${u.id}')" title="Editar Usuario & Rol">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <button class="icon-action-btn" style="width:32px; height:32px; font-size:0.78rem; color:${isSuspended ? '#4ade80' : '#f59e0b'};" onclick="toggleUserStatus('${u.id}')" title="${isSuspended ? 'Reactivar Acceso' : 'Suspender Acceso'}" ${isCurrent ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''}>
+                <i class="fa-solid ${isSuspended ? 'fa-user-check' : 'fa-user-slash'}"></i>
+              </button>
+              <button class="icon-action-btn" style="width:32px; height:32px; font-size:0.78rem; color:#ef4444;" onclick="deleteUser('${u.id}')" title="Eliminar Usuario" ${isCurrent ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''}>
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  function saveUsers() {
+    localStorage.setItem('joyeria_angy_admin_users', JSON.stringify(users));
+    renderUsersTable();
+  }
+
+  window.openAddUserModal = function() {
+    document.getElementById('userModalTitle').textContent = '➕ Registrar Nuevo Usuario / Colaborador';
+    userForm.reset();
+    document.getElementById('editUserId').value = '';
+    document.getElementById('formUserPass').required = true;
+    userModal?.classList.add('active');
+  };
+
+  window.openEditUserModal = function(id) {
+    const u = users.find(user => user.id === id);
+    if (!u) return;
+
+    document.getElementById('userModalTitle').textContent = `✏️ Editar Usuario: ${u.name}`;
+    document.getElementById('editUserId').value = u.id;
+    document.getElementById('formUserName').value = u.name;
+    document.getElementById('formUserEmail').value = u.email;
+    document.getElementById('formUserUsername').value = u.username;
+    document.getElementById('formUserRole').value = u.role;
+    document.getElementById('formUserStatus').value = u.status;
+    document.getElementById('formUserPass').value = '';
+    document.getElementById('formUserPass').placeholder = 'Dejar en blanco para mantener la contraseña actual';
+    document.getElementById('formUserPass').required = false;
+
+    userModal?.classList.add('active');
+  };
+
+  closeUserModalBtn?.addEventListener('click', () => userModal?.classList.remove('active'));
+  userModal?.addEventListener('click', (e) => {
+    if (e.target === userModal) userModal.classList.remove('active');
+  });
+
+  window.generateRandomPassword = function() {
+    const chars = 'abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@#$%';
+    let pass = '';
+    for (let i = 0; i < 10; i++) {
+      pass += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    const passInputEl = document.getElementById('formUserPass');
+    if (passInputEl) {
+      passInputEl.value = pass;
+      passInputEl.type = 'text';
+      showToast(`🔑 Clave generada: ${pass}`);
+    }
+  };
+
+  userForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const editId = document.getElementById('editUserId').value;
+    const name = document.getElementById('formUserName').value.trim();
+    const email = document.getElementById('formUserEmail').value.trim().toLowerCase();
+    const username = document.getElementById('formUserUsername').value.trim().toLowerCase();
+    const pass = document.getElementById('formUserPass').value.trim();
+    const role = document.getElementById('formUserRole').value;
+    const status = document.getElementById('formUserStatus').value;
+
+    const roleLabels = {
+      'superadmin': 'Super Administrador',
+      'manager': 'Gerente de Almacén',
+      'sales': 'Asesor de Ventas',
+      'auditor': 'Auditor Financiero'
+    };
+
+    if (editId) {
+      const idx = users.findIndex(u => u.id === editId);
+      if (idx > -1) {
+        users[idx].name = name;
+        users[idx].email = email;
+        users[idx].username = username;
+        users[idx].role = role;
+        users[idx].roleLabel = roleLabels[role] || 'Colaborador';
+        users[idx].status = status;
+        if (pass) users[idx].pass = pass;
+        showToast(`✨ Usuario "${name}" actualizado con éxito`);
+      }
+    } else {
+      const duplicate = users.find(u => u.email.toLowerCase() === email || u.username.toLowerCase() === username);
+      if (duplicate) {
+        alert('⚠️ Ya existe un usuario registrado con ese correo o nombre de usuario.');
+        return;
+      }
+
+      const newId = `usr-${Date.now().toString(36)}`;
+      users.push({
+        id: newId,
+        name,
+        email,
+        username,
+        pass: pass || 'angy2026',
+        role,
+        roleLabel: roleLabels[role] || 'Colaborador',
+        status,
+        createdAt: new Date().toISOString().slice(0, 10)
+      });
+      showToast(`👥 ¡Usuario "${name}" (${roleLabels[role]}) creado!`);
+    }
+
+    saveUsers();
+    userModal?.classList.remove('active');
+  });
+
+  window.toggleUserStatus = function(id) {
+    const u = users.find(user => user.id === id);
+    if (!u) return;
+    const newStatus = u.status === 'active' ? 'suspended' : 'active';
+    u.status = newStatus;
+    saveUsers();
+    showToast(`Estado de ${u.name} cambiado a ${newStatus === 'active' ? 'Activo' : 'Suspendido'}`);
+  };
+
+  window.deleteUser = function(id) {
+    const u = users.find(user => user.id === id);
+    if (!u) return;
+    if (confirm(`¿Estás seguro de eliminar el usuario "${u.name}" (${u.email})? Esta acción revocará todos sus accesos al ERP.`)) {
+      users = users.filter(user => user.id !== id);
+      saveUsers();
+      showToast('🗑️ Usuario eliminado del sistema');
+    }
+  };
+
+  document.getElementById('usersSearchInput')?.addEventListener('input', renderUsersTable);
+  document.getElementById('usersRoleFilter')?.addEventListener('change', renderUsersTable);
+
+  // 8. Control de Inventario y KPIs
   function updateKPIs() {
     const totalCount = products.length;
     const totalUnits = products.reduce((acc, p) => acc + (parseInt(p.stock, 10) || 0), 0);
@@ -191,7 +516,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 5. Renderizado de Tabla de Inventario
   function renderInventoryTable() {
     const tableBody = document.getElementById('inventoryTableBody');
     if (!tableBody) return;
@@ -201,16 +525,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterStock = document.getElementById('inventoryStockFilter')?.value || 'all';
 
     let list = products;
-    if (filterCat !== 'all') {
-      list = list.filter(p => p.category === filterCat);
-    }
-    if (filterStock === 'in') {
-      list = list.filter(p => p.stock > 3);
-    } else if (filterStock === 'low') {
-      list = list.filter(p => p.stock > 0 && p.stock <= 3);
-    } else if (filterStock === 'out') {
-      list = list.filter(p => p.stock <= 0);
-    }
+    if (filterCat !== 'all') list = list.filter(p => p.category === filterCat);
+    if (filterStock === 'in') list = list.filter(p => p.stock > 3);
+    else if (filterStock === 'low') list = list.filter(p => p.stock > 0 && p.stock <= 3);
+    else if (filterStock === 'out') list = list.filter(p => p.stock <= 0);
+
     if (searchQ) {
       list = list.filter(p => p.title.toLowerCase().includes(searchQ) || p.sku.toLowerCase().includes(searchQ));
     }
@@ -283,7 +602,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateKPIs();
   }
 
-  // 6. Funciones CRUD
   window.adjustStock = function(id, delta) {
     const prod = products.find(p => p.id === id);
     if (!prod) return;
@@ -423,7 +741,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Buscadores y Filtros
   document.getElementById('inventorySearchInput')?.addEventListener('input', renderInventoryTable);
   document.getElementById('inventoryCategoryFilter')?.addEventListener('change', renderInventoryTable);
   document.getElementById('inventoryStockFilter')?.addEventListener('change', renderInventoryTable);

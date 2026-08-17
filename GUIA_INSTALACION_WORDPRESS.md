@@ -1,6 +1,6 @@
 # 💍 Guía de Instalación y Configuración: Joyería Angy para WordPress & WooCommerce
 
-¡Bienvenido al tema oficial de **Joyería Angy**! Desarrollado específicamente para marcas de alta joyería en **Plata Ley .925** y **Acero Quirúrgico 316L**, con diseño editorial de lujo (estética *VERAE*), compras directas por WhatsApp, medidor virtual de anillos y **Portal de Administración e Inventario con Login Seguro e Independiente**.
+¡Bienvenido al tema oficial de **Joyería Angy**! Desarrollado específicamente para marcas de alta joyería en **Plata Ley .925** y **Acero Quirúrgico 316L**, con diseño editorial de lujo (estética *VERAE*), compras directas por WhatsApp, medidor virtual de anillos y **Portal de Administración e Inventario con Gestión de Usuarios y Roles de Joyería**.
 
 ---
 
@@ -8,33 +8,30 @@
 
 1. **Archivo Instalable ZIP**: `joyeria-angy-tema-wordpress.zip` (Listo para subir en WordPress).
 2. **Carpeta del Tema**: `wp-content/themes/joyeria-angy/`.
-3. **Tienda Pública de Clientes**: `preview/index.html` (Experiencia de compra 100% limpia y sin botones administrativos expuestos).
-4. **Portal Administrativo & ERP Independiente**: `preview/admin.html` (Pantalla de login y dashboard de inventario autónomo).
+3. **Tienda Pública de Clientes**: `preview/index.html` (Experiencia de compra 100% limpia para clientes).
+4. **Portal ERP Autónomo & Usuarios**: `preview/admin.html` (Pantalla de login, control de inventario y módulo de usuarios & roles).
 5. **Activos Gráficos**: Fotografía editorial de modelo y catálogo macro de joyas en alta resolución.
 
 ---
 
-## 🔒 2. Portal de Administración Independiente & Login
+## 🔒 2. Portal de Administración, Usuarios & Roles
 
-El panel de administración está desacoplado del sitio público para máxima seguridad y limpieza visual:
+El portal cuenta con un sistema de control de accesos basado en roles especializados para el negocio de joyería:
 
-### 🔑 Credenciales Oficiales de Demostración:
-- **Usuario / Correo**: `admin@joyeriaangy.com` (o simplemente `admin`)
-- **Contraseña**: `angy2026`
-- **Acceso Directo**: Abre el archivo [preview/admin.html](file:///c:/Users/wendy/OneDrive/Documentos/IGR/ConquerBloks/Antigravity/joyeriaangy/preview/admin.html) o haz clic en el enlace del pie de página *"Acceso Administrativo / ERP"*.
+### 👑 Cuentas de Acceso Preconfiguradas:
+| Rol | Correo / Usuario | Contraseña | Nivel de Permisos |
+| :--- | :--- | :--- | :--- |
+| **Super Administrador** | `admin@joyeriaangy.com` (o `admin`) | `angy2026` | Acceso total: inventario, finanzas, creación y suspensión de usuarios. |
+| **Gerente de Almacén** | `almacen@joyeriaangy.com` (o `almacen`) | `almacen2026` | Control de stock físico, altas, edición y alertas de existencias. |
+| **Asesor de Ventas** | `ventas@joyeriaangy.com` (o `ventas`) | `ventas2026` | Consulta de catálogo y stock en tiempo real para atención y WhatsApp. |
+| **Auditor Financiero** | `auditoria@joyeriaangy.com` (o `auditoria`) | `auditor2026` | Valuación monetaria de almacén y descarga de reportes JSON. |
 
-### 📊 Funcionalidades del Portal ERP:
-- **Dashboard KPI en Tiempo Real**:
-  - Modelos registrados.
-  - Piezas físicas totales en existencia.
-  - Valuación monetaria total del inventario en pesos mexicanos ($ MXN).
-  - Alertas automáticas de stock bajo (≤ 3 unidades) y piezas agotadas.
-- **Gestión de Catálogo (CRUD)**:
-  - ➕ **Registrar Nueva Joya**: Título, SKU único (ej. `ANGY-PL-006`), categoría, pureza del metal, precios, existencias y fotos.
-  - ✏️ **Editar / Eliminar**: Modificación en tiempo real.
-  - ⚡ **Ajuste Rápido de Stock**: Botones `+` y `-` con actualización instantánea.
-  - 📁 **Exportar Inventario**: Descarga en formato `.json` para respaldo y auditoría.
-  - 🔒 **Cierre de Sesión Seguro (Logout)**.
+### 👥 Funcionalidades del Módulo de Usuarios:
+- **Alta de Nuevos Colaboradores**: Formulario con nombre, correo, usuario único, rol asignado, estado y generador de contraseñas seguras.
+- **Edición y Cambio de Rol**: Modificación en tiempo real.
+- **Suspensión / Reactivación de Cuentas**: Bloqueo inmediato de acceso al ERP.
+- **Eliminación Segura**: Revocación definitiva de accesos.
+- **Autenticación Dinámica**: Cualquier usuario registrado puede iniciar sesión inmediatamente en la pantalla de login.
 
 ---
 
@@ -52,7 +49,7 @@ El panel de administración está desacoplado del sitio público para máxima se
 2. Titúlala `Admin` o `Portal ERP` (slug: `admin`).
 3. En la barra lateral derecha, bajo **Atributos de página > Plantilla**, selecciona:
    `Portal de Administración e Inventario`.
-4. Publica la página. Ahora estará disponible en `tudominio.com/admin` con su propia pantalla de login.
+4. Publica la página. Ahora estará disponible en `tudominio.com/admin` con su propia pantalla de login y selector de módulos.
 
 ---
 
