@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Documento Ejecutivo de Requerimientos Funcionales - Joyería Angy</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+        @page {
+            size: A4;
+            margin: 20mm 15mm 20mm 15mm;
+            @bottom-right {
+                content: counter(page);
+                font-family: 'Outfit', sans-serif;
+                font-size: 8pt;
+                color: #888888;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #2b231d;
+            background-color: #ffffff;
+            font-size: 9.5pt;
+            line-height: 1.55;
+            padding: 0;
+        }
+
+        .cover-page {
+            page-break-after: always;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px 20px 20px 20px;
+            background: linear-gradient(145deg, #18110d 0%, #2b1d16 100%);
+            color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #d4a373;
+            min-height: 920px;
+        }
+
+        .cover-header {
+            border-bottom: 2px solid #d4a373;
+            padding-bottom: 25px;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            background: rgba(212, 163, 115, 0.2);
+            color: #d4a373;
+            border: 1px solid #d4a373;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 8.5pt;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .cover-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 32pt;
+            color: #ffffff;
+            line-height: 1.15;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .cover-subtitle {
+            font-size: 13pt;
+            color: #e5d5c5;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .cover-body {
+            margin: 40px 0;
+        }
+
+        .cover-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 163, 115, 0.3);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .cover-card h3 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 14pt;
+            color: #d4a373;
+            margin-bottom: 8px;
+        }
+
+        .cover-card p {
+            color: #d5c8be;
+            font-size: 9pt;
+            line-height: 1.5;
+        }
+
+        .cover-meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .meta-item {
+            background: rgba(0, 0, 0, 0.25);
+            border-left: 3px solid #d4a373;
+            padding: 10px 14px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .meta-label {
+            font-size: 7.5pt;
+            text-transform: uppercase;
+            color: #a89f91;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+
+        .meta-value {
+            font-size: 10pt;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .cover-footer {
+            border-top: 1px solid rgba(212, 163, 115, 0.3);
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 8pt;
+            color: #a89f91;
+        }
+
+        /* Páginas interiores */
+        .page {
+            page-break-after: always;
+            padding-top: 10px;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        .doc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1.5px solid #d4a373;
+            padding-bottom: 10px;
+            margin-bottom: 22px;
+        }
+
+        .doc-brand {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 16pt;
+            color: #18110d;
+            font-weight: 700;
+        }
+
+        .doc-brand-sub {
+            font-size: 7.5pt;
+            color: #8c6a49;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+        }
+
+        .doc-tag {
+            font-size: 7.5pt;
+            color: #666666;
+            text-align: right;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 20pt;
+            color: #18110d;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #e8ded4;
+            padding-bottom: 6px;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 14pt;
+            color: #8c5a2b;
+            margin-top: 18px;
+            margin-bottom: 8px;
+        }
+
+        h3 {
+            font-size: 10pt;
+            color: #18110d;
+            font-weight: 600;
+            margin-top: 10px;
+            margin-bottom: 4px;
+        }
+
+        p {
+            margin-bottom: 10px;
+            color: #3d332a;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-left: 18px;
+            margin-bottom: 12px;
+        }
+
+        li {
+            margin-bottom: 4px;
+            color: #3d332a;
+        }
+
+        /* Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0 18px 0;
+            font-size: 8.5pt;
+        }
+
+        th, td {
+            padding: 8px 10px;
+            border: 1px solid #dfd7ce;
+            text-align: left;
+        }
+
+        th {
+            background-color: #18110d;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fbf9f6;
+        }
+
+        .rf-badge {
+            background: #f0e6dc;
+            color: #734822;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 7.5pt;
+            display: inline-block;
+        }
+
+        .priority-high {
+            color: #b91c1c;
+            font-weight: 600;
+        }
+
+        .priority-med {
+            color: #d97706;
+            font-weight: 600;
+        }
+
+        .card-box {
+            background: #faf7f2;
+            border: 1px solid #e8ded4;
+            border-left: 4px solid #d4a373;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 14px 0;
+        }
+
+        .card-box strong {
+            color: #18110d;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .role-pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 7.5pt;
+            font-weight: 600;
+        }
+        .pill-superadmin { background: #fae8d4; color: #8c531b; border: 1px solid #d4a373; }
+        .pill-manager { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .pill-sales { background: #e0f2fe; color: #0369a1; border: 1px solid #7dd3fc; }
+        .pill-auditor { background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe; }
+
+        .signature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 45px;
+        }
+
+        .sig-box {
+            border-top: 1px solid #18110d;
+            padding-top: 8px;
+            text-align: center;
+        }
+
+        .sig-name {
+            font-weight: 700;
+            color: #18110d;
+            font-size: 9.5pt;
+        }
+
+        .sig-role {
+            font-size: 8pt;
+            color: #666666;
+        }
+    </style>
+</head>
+<body>
+
+<!-- =========================================================================
+     PORTADA EJECUTIVA
+========================================================================= -->
+<div class="cover-page">
+    <div class="cover-header">
+        <span class="cover-badge">Documento de Especificación Técnica & Funcional</span>
+        <h1 class="cover-title">Joyería Angy</h1>
+        <div class="cover-subtitle">Plataforma de Comercio Electrónico & Sistema ERP de Control de Inventario</div>
+    </div>
+
+    <div class="cover-body">
+        <div class="cover-card">
+            <h3>Visión y Propósito del Proyecto</h3>
+            <p>Implementación integral de la solución digital de alta gama para <strong>Joyería Angy</strong>, especializada en joyería fina de <strong>Plata Esterlina Ley .925 quintada</strong> y <strong>Acero Quirúrgico 316L</strong>. El sistema combina una tienda virtual con estética editorial de lujo (paleta mocha/espresso cálida estilo <em>VERAE</em>) con un portal ERP autónomo de gestión de existencias y control de accesos por roles de colaboradores.</p>
+        </div>
+
+        <div class="cover-meta-grid">
+            <div class="meta-item">
+                <div class="meta-label">Proyecto</div>
+                <div class="meta-value">E-commerce & Portal ERP Joyería Angy</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Versión del Documento</div>
+                <div class="meta-value">v1.0 (Producción 2026)</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Metales Certificados</div>
+                <div class="meta-value">Plata Ley .925 & Acero 316L</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Canal de Conversión</div>
+                <div class="meta-value">WhatsApp Checkout & Pasarela Web</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cover-footer">
+        <div><strong>Autor:</strong> Gaona Consultores TI</div>
+        <div><strong>Fecha de Emisión:</strong> Agosto 2026</div>
+        <div><strong>Estado:</strong> Aprobado para Producción</div>
+    </div>
+</div>
+
+<!-- =========================================================================
+     PÁGINA 1: RESUMEN EJECUTIVO Y ARQUITECTURA
+========================================================================= -->
+<div class="page">
+    <div class="doc-header">
+        <div>
+            <span class="doc-brand">Joyería Angy</span>
+            <span class="doc-brand-sub">Especificación de Requerimientos Funcionales</span>
+        </div>
+        <div class="doc-tag">Página 1 de 4</div>
+    </div>
+
+    <h1>1. Resumen Ejecutivo & Objetivos del Negocio</h1>
+    
+    <p>El presente documento formaliza los requerimientos funcionales y técnicos implementados en la plataforma digital de <strong>Joyería Angy</strong>. La plataforma fue concebida para solventar dos necesidades críticas del negocio joyero:</p>
+    
+    <ol>
+        <li><strong>Canal de Ventas de Alta Conversión:</strong> Proporcionar a los clientes una experiencia de compra editorial de alto impacto estético, facilitando la selección de tallas y agilizando el cierre de pedidos mediante integración directa con WhatsApp Business y pasarelas de pago.</li>
+        <li><strong>Control Operativo & Inventario Independiente:</strong> Dotar a la gerencia y colaboradores de un panel de administración desacoplado con control de existencias en tiempo real, alertas de desabasto, valuación financiera del almacén y perfiles de acceso restringidos por rol.</li>
+    </ol>
+
+    <h2>1.1. Arquitectura del Ecosistema</h2>
+    <p>El sistema opera bajo una arquitectura desacoplada en dos módulos principales:</p>
+
+    <div class="card-box">
+        <strong>A. Front-End de Clientes (Tienda Pública):</strong>
+        Interfaz pública de comercio electrónico optimizada para velocidad, SEO y conversión en dispositivos móviles y de escritorio. Libre de controles administrativos para una experiencia de usuario limpia.
+    </div>
+
+    <div class="card-box">
+        <strong>B. Portal ERP Autónomo (Back-Office & Almacén):</strong>
+        Sistema administrativo independiente protegido por pantalla de login seguro, que interactúa dinámicamente con el catálogo público y almacena la base de datos de productos y usuarios.
+    </div>
+
+    <h2>1.2. Especificaciones de Diseño e Identidad Visual</h2>
+    <ul>
+        <li><strong>Paleta de Color:</strong> Tonos mocha, espresso profundo (<code>#140E0B</code>), crema marfil (<code>#F4EFEA</code>) y detalles en bronce/oro cálido (<code>#D4A373</code>).</li>
+        <li><strong>Tipografía de Lujo:</strong> <em>Cormorant Garamond</em> para titulares editoriales y <em>Outfit</em> para textos legibles de interfaz y precios.</li>
+        <li><strong>Garantía de Metales:</strong> Iconografía y distintivos para Plata Ley .925 quintada e hipoalergénica.</li>
+    </ul>
+</div>
+
+<!-- =========================================================================
+     PÁGINA 2: REQUERIMIENTOS FUNCIONALES (FRONT-END CLIENTES)
+========================================================================= -->
+<div class="page">
+    <div class="doc-header">
+        <div>
+            <span class="doc-brand">Joyería Angy</span>
+            <span class="doc-brand-sub">Especificación de Requerimientos Funcionales</span>
+        </div>
+        <div class="doc-tag">Página 2 de 4</div>
+    </div>
+
+    <h1>2. Matriz de Requerimientos Funcionales: Tienda Pública</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 12%;">Código</th>
+                <th style="width: 25%;">Requerimiento</th>
+                <th style="width: 48%;">Descripción Funcional</th>
+                <th style="width: 15%;">Prioridad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="rf-badge">RF-01</span></td>
+                <td><strong>Catálogo & Filtros por Categoría</strong></td>
+                <td>Navegación fluida por categorías de joyería: <em>Anillos de Compromiso, Collares & Dijes, Pulseras Finas, Aretes & Arracadas, Joyería de Parejas y Acero Quirúrgico</em> con filtros dinámicos instantáneos sin recarga de página.</td>
+                <td><span class="priority-high">Crítica</span></td>
+            </tr>
+            <tr>
+                <td><span class="rf-badge">RF-02</span></td>
+                <td><strong>Mini-Carrito Drawer & Envío Gratis</strong></td>
+                <td>Panel lateral deslizante (Drawer) con cálculo de subtotal en tiempo real y barra de progreso dinámica que indica el monto faltante para desbloquear <strong>Envío Gratis ($1,499 MXN)</strong>.</td>
+                <td><span class="priority-high">Crítica</span></td>
+            </tr>
+            <tr>
+                <td><span class="rf-badge">RF-03</span></td>
+                <td><strong>Checkout Directo por WhatsApp</strong></td>
+                <td>Generación automática de un mensaje pre-estructurado para WhatsApp con la lista de joyas seleccionadas, tallas, metales, precios unitarios y subtotal para cierre de venta inmediato con un asesor.</td>
+                <td><span class="priority-high">Crítica</span></td>
+            </tr>
+            <tr>
+                <td><span class="rf-badge">RF-04</span></td>
+                <td><strong>Medidor Virtual de Anillos (Ring Sizer)</strong></td>
+                <td>Herramienta interactiva de calibración milimétrica en pantalla con control deslizante para identificar tallas estándar México/USA (5 al 12) y diámetro interior exacto.</td>
+                <td><span class="priority-med">Alta</span></td>
+            </tr>
+            <tr>
+                <td><span class="rf-badge">RF-05</span></td>
+                <td><strong>Ficha Técnica de Producto</strong></td>
+                <td>Vista detallada con selector de talla, pureza del metal (.925 / Acero), galería de fotos en alta definición, disponibilidad de stock y cálculo de mensualidades.</td>
+                <td><span class="priority-high">Crítica</span></td>
+            </tr>
+            <tr>
+                <td><span class="rf-badge">RF-06</span></td>
+                <td><strong>Guía de Cuidados de la Plata .925</strong></td>
+                <td>Sección educativa interactiva sobre mantenimiento, uso del paño abrillantador, almacenamiento hermético y garantía de autenticidad.</td>
+                <td><span class="priority-med">Media</span></td>
+            </tr>
+            <tr>
+                <td><span class="rf-badge">RF-07</span></td>
+                <td><strong>Barra de Anuncios Superior</strong></td>
+                <td>Banner superior con aviso de envío gratuito y enlaces de acceso rápido a WhatsApp y medidor de anillos, con diseño responsivo anti-colisión con el logotipo.</td>
+                <td><span class="priority-med">Alta</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>2.1. Flujo de Experiencia del Cliente</h2>
+    <p>El cliente ingresa a la tienda &rarr; Explora las piezas por categoría &rarr; Utiliza el medidor virtual si desconoce su talla &rarr; Agrega piezas al carrito &rarr; Verifica la barra de envío gratis &rarr; Clic en <em>"Finalizar Pedido por WhatsApp"</em> &rarr; Se abre la conversación con los datos exactos del pedido listos para confirmar.</p>
+</div>
+
+<!-- =========================================================================
+     PÁGINA 3: REQUERIMIENTOS FUNCIONALES (PORTAL ERP & USUARIOS)
+========================================================================= -->
+<div class="page">
+    <div class="doc-header">
+        <div>
+            <span class="doc-brand">Joyería Angy</span>
+            <span class="doc-brand-sub">Especificación de Requerimientos Funcionales</span>
+        </div>
+        <div class="doc-tag">Página 3 de 4</div>
+    </div>
+
+    <h1>3. Matriz de Requerimientos: Portal ERP & Usuarios</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 12%;">Código</th>
+                <th style="width: 25%;">Requerimiento</th>
+                <th style="width: 48%;">Descripción Funcional</th>
+                <th style="width: 15%;">Prioridad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="rf-badge">RF-08</span></td>
+                <td><strong>Login & Autenticación de Acceso</strong></td>
+                <td>Pantalla de inicio de sesión segura e independiente, desacoplada del sitio de clientes. Valida credenciales contra la base de colaboradores y bloquea cuentas suspendidas.</td>
+                <td><span class="priority-high">Crítica</span></td>
+            </tr>
+            <tr>
+                <td><span class="rf-badge">RF-09</span></td>
+                <td><strong>Dashboard de KPIs Financieros & Stock</strong></td>
+                <td>Métricas en tiempo real: modelos registrados, total de piezas físicas en almacén, <strong>valuación económica del inventario ($ MXN)</strong> y alertas de stock bajo (≤ 3 unidades) o agotadas.</td>
+                <td><span class="priority-high">Crítica</span></td>
+            </tr>
+            <tr>
+                <td><span class="rf-badge">RF-10</span></td>
+                <td><strong>Gestión de Catálogo (CRUD)</strong></td>
+                <td>Módulo para dar de alta nuevas joyas, asignar código SKU único (ej. <code>ANGY-PL-006</code>), categoría, pureza del metal, precio de venta, precio de oferta, stock y fotografía.</td>
+                <td><span class="priority-high">Crítica</span></td>
+            </tr>
+            <tr>
+                <td><span class="rf-badge">RF-11</span></td>
+                <td><strong>Ajuste Rápido de Stock (+ / -)</strong></td>
+                <td>Control de inventario unitario directo desde la tabla para aumentar o disminuir existencias tras ventas físicas en mostrador con actualización inmediata.</td>
+                <td><span class="priority-high">Crítica</span></td>
+            </tr>
+            <tr>
+                <td><span class="rf-badge">RF-12</span></td>
+                <td><strong>Módulo de Creación de Usuarios & Roles</strong></td>
+                <td>Formulario para registrar nuevos colaboradores, asignar roles de permisos, generar contraseñas seguras y suspender/reactivar accesos.</td>
+                <td><span class="priority-high">Crítica</span></td>
+            </tr>
+            <tr>
+                <td><span class="rf-badge">RF-13</span></td>
+                <td><strong>Exportación de Almacén (JSON)</strong></td>
+                <td>Descarga de copias de seguridad de todo el catálogo e inventario en formato estructurado JSON para auditorías contables y respaldos locales.</td>
+                <td><span class="priority-med">Alta</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>3.1. Matriz de Roles y Niveles de Permiso</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Rol de Joyería</th>
+                <th>Insignia</th>
+                <th>Acceso a Inventario</th>
+                <th>Gestión de Usuarios</th>
+                <th>Valuación & Finanzas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Super Administrador</strong></td>
+                <td><span class="role-pill pill-superadmin">Super Admin</span></td>
+                <td>Total (Crear, Editar, Borrar)</td>
+                <td>Total (Crear, Suspender, Borrar)</td>
+                <td>Total y Descarga JSON</td>
+            </tr>
+            <tr>
+                <td><strong>Gerente de Almacén</strong></td>
+                <td><span class="role-pill pill-manager">Almacén</span></td>
+                <td>Operativo (Altas, Stock, Edición)</td>
+                <td>Solo Lectura</td>
+                <td>Visualización de Stock</td>
+            </tr>
+            <tr>
+                <td><strong>Asesor de Ventas</strong></td>
+                <td><span class="role-pill pill-sales">Ventas</span></td>
+                <td>Consulta de Existencias y Catálogo</td>
+                <td>Sin Acceso</td>
+                <td>Solo Precios de Venta</td>
+            </tr>
+            <tr>
+                <td><strong>Auditor Financiero</strong></td>
+                <td><span class="role-pill pill-auditor">Auditoría</span></td>
+                <td>Lectura de Almacén</td>
+                <td>Sin Acceso</td>
+                <td>Valuación Monetaria & Exportación</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- =========================================================================
+     PÁGINA 4: REQUERIMIENTOS NO FUNCIONALES Y APROBACIONES
+========================================================================= -->
+<div class="page">
+    <div class="doc-header">
+        <div>
+            <span class="doc-brand">Joyería Angy</span>
+            <span class="doc-brand-sub">Especificación de Requerimientos Funcionales</span>
+        </div>
+        <div class="doc-tag">Página 4 de 4</div>
+    </div>
+
+    <h1>4. Requerimientos No Funcionales (RNF)</h1>
+
+    <div class="card-box">
+        <strong>RNF-01: Rendimiento & Velocidad de Carga</strong>
+        El portal está optimizado sin librerías pesadas, garantizando una carga inferior a 1.2 segundos y experiencia fluida en conexiones móviles 4G.
+    </div>
+
+    <div class="card-box">
+        <strong>RNF-02: Compatibilidad Multiplataforma & Responsividad</strong>
+        Diseño adaptable a dispositivos móviles (iOS / Android), tabletas y computadoras de escritorio, manteniendo legibilidad tipográfica y botones táctiles amplios.
+    </div>
+
+    <div class="card-box">
+        <strong>RNF-03: Desacoplamiento & Seguridad</strong>
+        Aislamiento entre la vista pública de clientes y el portal administrativo, protegiendo las funciones de inventario de accesos no autorizados.
+    </div>
+
+    <div class="card-box">
+        <strong>RNF-04: Compatibilidad con WordPress & WooCommerce</strong>
+        El código del tema cumple con los estándares oficiales de desarrollo para WordPress (`functions.php`, `front-page.php`, `header.php`, `footer.php`, `page-admin.php`).
+    </div>
+
+    <h1>5. Entregables & Aprobación Formal del Proyecto</h1>
+    <p>Los componentes descritos en este documento han sido desarrollados, probados, empaquetados e integrados en el repositorio del proyecto:</p>
+    
+    <ul>
+        <li><strong>Paquete Instalable WordPress:</strong> <code>joyeria-angy-tema-wordpress.zip</code></li>
+        <li><strong>Portal Web Interactivo:</strong> <code>preview/index.html</code> y <code>preview/admin.html</code></li>
+        <li><strong>Manual de Instalación:</strong> <code>GUIA_INSTALACION_WORDPRESS.md</code></li>
+        <li><strong>Control de Versiones:</strong> Repositorio oficial en GitHub (Rama <code>main</code>).</li>
+    </ul>
+
+    <div class="signature-grid">
+        <div class="sig-box">
+            <div class="sig-name">Joyería Angy</div>
+            <div class="sig-role">Dirección General & Aprobación de Negocio</div>
+        </div>
+        <div class="sig-box">
+            <div class="sig-name">Equipo de Desarrollo & Arquitectura</div>
+            <div class="sig-role">Gaona Consultores TI</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
