@@ -64,8 +64,8 @@
                     <li><a href="<?php echo esc_url( home_url( '/cuidados-de-la-plata' ) ); ?>" class="footer-link">Guía de Limpieza de Plata .925</a></li>
                     <li><a href="<?php echo esc_url( home_url( '/envios-y-devoluciones' ) ); ?>" class="footer-link">Tiempos de Envío y Paqueterías</a></li>
                     <li><a href="<?php echo esc_url( home_url( '/garantia-autenticidad' ) ); ?>" class="footer-link">Certificado de Autenticidad</a></li>
-                    <li><a href="<?php echo esc_url( home_url( '/preguntas-frecuentes' ) ); ?>" class="footer-link">Preguntas Frecuentes (FAQ)</a></li>
                     <li><a href="<?php echo esc_url( home_url( '/mayoreo' ) ); ?>" class="footer-link">Ventas por Mayoreo</a></li>
+                    <li><a href="<?php echo esc_url( home_url( '/admin' ) ); ?>" class="footer-link" style="color:var(--color-gold-bronze);"><i class="fa-solid fa-shield-halved"></i> Acceso Administrativo / ERP</a></li>
                 </ul>
             </div>
 

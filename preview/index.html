@@ -92,9 +92,9 @@
         <button class="view-pill-btn" onclick="switchView('tallas')">4. Medidor de Tallas</button>
         <button class="view-pill-btn" onclick="switchView('cuidados')">5. Cuidados Plata .925</button>
         <button class="view-pill-btn" onclick="switchView('contacto')">6. Contacto & Mayoreo</button>
-        <button class="view-pill-btn view-pill-admin" onclick="switchView('admin')">
-            <i class="fa-solid fa-boxes-stacked"></i> 7. Admin & Inventario
-        </button>
+        <a href="admin.html" class="view-pill-btn view-pill-admin" title="Abrir Portal de Administración con Login">
+            <i class="fa-solid fa-lock"></i> 7. Portal Admin (Login Independiente) &rarr;
+        </a>
     </div>
 </div>
 
@@ -129,7 +129,7 @@
                 <span class="brand-subtitle">Plata Ley .925 & Acero</span>
             </div>
 
-            <!-- Menú Principal -->
+            <!-- Menú Principal para Clientes -->
             <nav class="main-navigation" aria-label="Menú Principal">
                 <ul class="main-nav">
                     <li><a href="javascript:void(0)" onclick="switchView('inicio')" class="nav-link active" id="nav-inicio">Inicio</a></li>
@@ -141,7 +141,6 @@
                     <li><a href="javascript:void(0)" onclick="switchView('tallas')" class="nav-link" id="nav-tallas">Medidor Tallas</a></li>
                     <li><a href="javascript:void(0)" onclick="switchView('cuidados')" class="nav-link" id="nav-cuidados">Cuidados</a></li>
                     <li><a href="javascript:void(0)" onclick="switchView('contacto')" class="nav-link" id="nav-contacto">Contacto</a></li>
-                    <li><a href="javascript:void(0)" onclick="switchView('admin')" class="nav-link" id="nav-admin" style="color: #a78bfa;"><i class="fa-solid fa-lock" style="font-size:0.75rem;"></i> Inventario <span class="nav-badge-admin">Admin</span></a></li>
                 </ul>
             </nav>
 
@@ -154,10 +153,6 @@
 
                 <button class="icon-action-btn open-ring-sizer-btn" title="Medidor de Tallas de Anillos">
                     <i class="fa-solid fa-circle-dot"></i>
-                </button>
-
-                <button class="icon-action-btn" onclick="switchView('admin')" title="Panel de Administración e Inventario" style="color: #c4b5fd;">
-                    <i class="fa-solid fa-sliders"></i>
                 </button>
 
                 <button class="icon-action-btn cart-toggle-btn" title="Ver Carrito de Joyería">
@@ -1153,7 +1148,7 @@
                     <li><a href="javascript:void(0)" onclick="switchView('contacto')" class="footer-link">Tiempos de Envío y Paqueterías</a></li>
                     <li><a href="javascript:void(0)" onclick="switchView('cuidados')" class="footer-link">Certificado de Autenticidad</a></li>
                     <li><a href="javascript:void(0)" onclick="switchView('contacto')" class="footer-link">Ventas por Mayoreo</a></li>
-                    <li><a href="javascript:void(0)" onclick="switchView('admin')" class="footer-link" style="color:#a78bfa;"><i class="fa-solid fa-lock"></i> Panel Administrador</a></li>
+                    <li><a href="admin.html" class="footer-link" style="color:var(--color-gold-bronze);"><i class="fa-solid fa-shield-halved"></i> Portal de Administración (ERP)</a></li>
                 </ul>
             </div>
 
