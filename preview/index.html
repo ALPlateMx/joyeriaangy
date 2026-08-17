@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyería Angy | Alta Joyería de Plata Ley .925 & Acero Inoxidable</title>
+    <meta name="description" content="Diseños exclusivos de joyería fina en Plata Esterlina Ley .925 y Acero Quirúrgico en México. Anillos de compromiso, collares, pulseras y medidor virtual de tallas.">
+    
+    <!-- Fuentes Google Fonts: Cormorant Garamond & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Iconos FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Estilos de Lujo del Tema WordPress -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <style>
+        /* Estilos complementarios para la vista interactiva */
+        .page-view {
+            display: none;
+        }
+        .page-view.active-view {
+            display: block;
+            animation: fadeInView 0.4s ease-out;
+        }
+        @keyframes fadeInView {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .view-switch-banner {
+            background: rgba(30, 41, 59, 0.7);
+            border-bottom: 1px solid var(--border-silver);
+            padding: 0.6rem 0;
+            font-size: 0.82rem;
+            color: #cbd5e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .view-pill-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-glass);
+            color: #ffffff;
+            padding: 0.3rem 0.85rem;
+            border-radius: var(--radius-full);
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .view-pill-btn:hover, .view-pill-btn.active {
+            background: #38bdf8;
+            color: #0f172a;
+            font-weight: 600;
+            border-color: #38bdf8;
+        }
+
+        .product-card {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Barra de Control del Prototipo Interactivo WordPress -->
+<div class="view-switch-banner">
+    <span><i class="fa-solid fa-wand-magic-sparkles" style="color: #38bdf8;"></i> <strong>Demostración Interactiva Joyería Angy:</strong></span>
+    <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+        <button class="view-pill-btn active" onclick="switchView('inicio')">1. Inicio (Home)</button>
+        <button class="view-pill-btn" onclick="switchView('catalogo')">2. Catálogo & Tienda</button>
+        <button class="view-pill-btn" onclick="switchView('producto')">3. Ficha de Producto</button>
+        <button class="view-pill-btn" onclick="switchView('tallas')">4. Medidor de Tallas</button>
+        <button class="view-pill-btn" onclick="switchView('cuidados')">5. Cuidados Plata .925</button>
+        <button class="view-pill-btn" onclick="switchView('contacto')">6. Contacto & Mayoreo</button>
+    </div>
+</div>
+
+<!-- Barra Superior de Anuncios -->
+<div class="top-bar">
+    <div class="container">
+        <div class="top-bar-announcement">
+            <span class="top-badge-pulse"></span>
+            <span>✨ Envío Gratis en compras mayores a $1,499 MXN | Plata Ley .925 Garantizada</span>
+        </div>
+        <div class="top-bar-links">
+            <a href="javascript:void(0)" class="top-bar-link open-ring-sizer-btn">
+                <i class="fa-solid fa-ruler-combined"></i> Medidor de Anillos
+            </a>
+            <a href="https://wa.me/5215512345678?text=Hola%20Joyer%C3%ADa%20Angy,%20quisiera%20asesor%C3%ADa" target="_blank" class="top-bar-link">
+                <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i> Atención Inmediata WhatsApp
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Header & Navbar Sticky -->
+<header class="site-header" id="siteHeader">
+    <div class="container">
+        <div class="nav-wrapper">
+            
+            <!-- Logo Joyería Angy -->
+            <div class="site-brand">
+                <a href="javascript:void(0)" onclick="switchView('inicio')">
+                    <span class="brand-name">Joyería Angy</span>
+                </a>
+                <span class="brand-subtitle">Plata Ley .925 & Acero</span>
+            </div>
+
+            <!-- Menú Principal -->
+            <nav class="main-navigation" aria-label="Menú Principal">
+                <ul class="main-nav">
+                    <li><a href="javascript:void(0)" onclick="switchView('inicio')" class="nav-link active" id="nav-inicio">Inicio</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('catalogo')" class="nav-link" id="nav-catalogo">Catálogo</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('catalogo', 'anillos')" class="nav-link">Anillos</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('catalogo', 'collares')" class="nav-link">Collares & Dijes</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('catalogo', 'pulseras')" class="nav-link">Pulseras</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('catalogo', 'parejas')" class="nav-link">Parejas <span class="nav-badge-new">HOT</span></a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('tallas')" class="nav-link" id="nav-tallas">Medidor Tallas</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('cuidados')" class="nav-link" id="nav-cuidados">Cuidados</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('contacto')" class="nav-link" id="nav-contacto">Contacto</a></li>
+                </ul>
+            </nav>
+
+            <!-- Acciones -->
+            <div class="header-actions">
+                <div class="search-trigger-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon-inside"></i>
+                    <input type="text" placeholder="Buscar joyas..." class="search-input-header" id="globalSearchInput">
+                </div>
+
+                <button class="icon-action-btn open-ring-sizer-btn" title="Medidor de Tallas de Anillos">
+                    <i class="fa-solid fa-circle-dot"></i>
+                </button>
+
+                <button class="icon-action-btn cart-toggle-btn" title="Ver Carrito de Joyería">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count-badge">1</span>
+                </button>
+
+                <a href="https://wa.me/5215512345678?text=Hola%20Joyer%C3%ADa%20Angy,%20quisiera%20atenci%C3%B3n%20para%20un%20pedido" target="_blank" class="btn btn-whatsapp btn-sm" style="display: inline-flex;">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<!-- =========================================================================
+     VISTA 1: INICIO (HOME PAGE)
+========================================================================= -->
+<div id="view-inicio" class="page-view active-view">
+    
+    <!-- 1. Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fa-solid fa-gem" style="color: #38bdf8;"></i> Colección Exclusiva 2026
+                </div>
+                <h1 class="hero-title text-gradient-silver">
+                    Elegancia Eterna en Plata Ley .925
+                </h1>
+                <p class="hero-desc">
+                    Descubre piezas de alta joyería artesanal y acero quirúrgico diseñadas para brillar siempre. Certificado de autenticidad, acabados de espejo y empaque de lujo incluido.
+                </p>
+                <div class="hero-cta-group">
+                    <button class="btn btn-primary" onclick="switchView('catalogo')">
+                        <i class="fa-solid fa-sparkles"></i> Ver Colección Completa
+                    </button>
+                    <button class="btn btn-outline-silver open-ring-sizer-btn">
+                        <i class="fa-solid fa-ruler-combined"></i> Medir mi Talla
+                    </button>
+                </div>
+
+                <!-- Estadísticas de Confianza -->
+                <div class="hero-stats">
+                    <div class="hero-stat-item">
+                        <h4>.925</h4>
+                        <p>Plata Pura Certificada</p>
+                    </div>
+                    <div class="hero-stat-item">
+                        <h4>+12,000</h4>
+                        <p>Clientes Felices</p>
+                    </div>
+                    <div class="hero-stat-item">
+                        <h4>100%</h4>
+                        <p>Garantía de Brillo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-bg-media">
+            <img src="assets/images/hero-banner.jpg" alt="Joyería Angy Plata Ley .925">
+        </div>
+    </section>
+
+    <!-- 2. Sellos de Confianza -->
+    <section class="trust-banner">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-card">
+                    <div class="trust-icon-box">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                    <div class="trust-text">
+                        <h4>Plata Ley .925 Quintada</h4>
+                        <p>Cada pieza incluye su sello oficial .925 y certificado de pureza garantizada.</p>
+                    </div>
+                </div>
+
+                <div class="trust-card">
+                    <div class="trust-icon-box">
+                        <i class="fa-solid fa-gift"></i>
+                    </div>
+                    <div class="trust-text">
+                        <h4>Empaque de Regalo Gratis</h4>
+                        <p>Estuche rígido de lujo, morral de terciopelo y moño de regalo en cada orden.</p>
+                    </div>
+                </div>
+
+                <div class="trust-card">
+                    <div class="trust-icon-box">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <div class="trust-text">
+                        <h4>Envío Asegurado Express</h4>
+                        <p>Envíos rápidos a todo México con guía de rastreo y seguro contra extravío.</p>
+                    </div>
+                </div>
+
+                <div class="trust-card">
+                    <div class="trust-icon-box">
+                        <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i>
+                    </div>
+                    <div class="trust-text">
+                        <h4>Atención Personalizada</h4>
+                        <p>Asesoría inmediata por WhatsApp para elegir la talla y modelo ideal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Categorías Destacadas -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Explora por Categoría</span>
+                <h2 class="text-gradient-silver">Joyas para Cada Momento Especial</h2>
+                <p>Diseños contemporáneos trabajados con precisión milimétrica en plata fina y acero 316L.</p>
+            </div>
+
+            <div class="categories-grid">
+                <div class="category-card" onclick="switchView('catalogo', 'anillos')">
+                    <img src="assets/images/anillo-solitario.jpg" alt="Anillos de Plata .925">
+                    <div class="category-overlay">
+                        <h3 class="category-title">Anillos & Solitarios</h3>
+                        <span class="category-count">Ver 24 Modelos &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="switchView('catalogo', 'collares')">
+                    <img src="assets/images/collar-corazon.jpg" alt="Collares y Dijes Plata .925">
+                    <div class="category-overlay">
+                        <h3 class="category-title">Collares & Dijes</h3>
+                        <span class="category-count">Ver 18 Modelos &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="switchView('catalogo', 'pulseras')">
+                    <img src="assets/images/pulsera-eslabones.jpg" alt="Pulseras de Plata .925">
+                    <div class="category-overlay">
+                        <h3 class="category-title">Pulseras & Eslabones</h3>
+                        <span class="category-count">Ver 16 Modelos &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="switchView('catalogo', 'aretes')">
+                    <img src="assets/images/aretes-arracadas.jpg" alt="Aretes y Arracadas Plata .925">
+                    <div class="category-overlay">
+                        <h3 class="category-title">Aretes & Arracadas</h3>
+                        <span class="category-count">Ver 20 Modelos &rarr;</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="switchView('catalogo', 'parejas')">
+                    <img src="assets/images/anillos-pareja.jpg" alt="Anillos para Pareja Plata .925">
+                    <div class="category-overlay">
+                        <h3 class="category-title">Dúos de Promesa & Boda</h3>
+                        <span class="category-count">Ver 12 Dúos &rarr;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Catálogo Destacado / Más Vendidos -->
+    <section class="section-padding" style="background: rgba(15, 23, 42, 0.4);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Lo Más Deseado</span>
+                <h2 class="text-gradient-silver">Piezas Más Vendidas de Joyería Angy</h2>
+                <p>Joyería con alta demanda, disponibilidad limitada y acabados pulidos a mano.</p>
+            </div>
+
+            <!-- Filtros de Pestañas -->
+            <div class="product-tabs">
+                <button class="tab-btn active" data-category="all">Todos</button>
+                <button class="tab-btn" data-category="anillos">Anillos</button>
+                <button class="tab-btn" data-category="collares">Collares</button>
+                <button class="tab-btn" data-category="pulseras">Pulseras</button>
+                <button class="tab-btn" data-category="aretes">Aretes</button>
+                <button class="tab-btn" data-category="parejas">Parejas</button>
+            </div>
+
+            <!-- Grid de Productos -->
+            <div class="products-grid">
+                
+                <!-- Producto 1: Anillo Solitario -->
+                <div class="product-card" data-category="anillos" onclick="openProductDetail('prod-1')">
+                    <div class="product-image-wrap">
+                        <span class="product-badges">
+                            <span class="badge badge-hot">Más Vendido</span>
+                            <span class="badge badge-silver">Plata .925</span>
+                        </span>
+                        <div class="product-actions-hover" onclick="event.stopPropagation()">
+                            <button class="action-icon-btn wishlist-btn" data-id="p1" onclick="toggleWishlist('p1', 'Anillo Solitario Brillante .925')"><i class="fa-regular fa-heart"></i></button>
+                            <button class="action-icon-btn open-ring-sizer-btn"><i class="fa-solid fa-ruler"></i></button>
+                        </div>
+                        <img src="assets/images/anillo-solitario.jpg" alt="Anillo Solitario Plata .925">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-meta-tag">Anillos de Compromiso</span>
+                        <h4 class="product-title">Anillo Solitario Diamante Simulado Plata .925</h4>
+                        <div class="product-rating">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="rating-count">(48 reseñas)</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="current-price">$1,290 MXN</span>
+                            <span class="regular-price">$1,650 MXN</span>
+                        </div>
+                        <div class="product-btn-group" onclick="event.stopPropagation()">
+                            <button class="btn btn-primary btn-sm add-to-cart-quick" data-id="prod-1" data-price="1290">
+                                <i class="fa-solid fa-bag-shopping"></i> Agregar
+                            </button>
+                            <a href="#" class="btn btn-whatsapp btn-sm btn-whatsapp-product" data-title="Anillo Solitario Diamante Simulado Plata .925" data-price="1290">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 2: Collar Corazón Zafiro -->
+                <div class="product-card" data-category="collares" onclick="openProductDetail('prod-2')">
+                    <div class="product-image-wrap">
+                        <span class="product-badges">
+                            <span class="badge badge-sale">-20% OFF</span>
+                            <span class="badge badge-silver">Plata .925</span>
+                        </span>
+                        <div class="product-actions-hover" onclick="event.stopPropagation()">
+                            <button class="action-icon-btn wishlist-btn" data-id="p2" onclick="toggleWishlist('p2', 'Gargantilla Corazón de Cristal Zafiro')"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                        <img src="assets/images/collar-corazon.jpg" alt="Gargantilla Corazón de Cristal Zafiro">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-meta-tag">Collares & Dijes</span>
+                        <h4 class="product-title">Gargantilla Corazón de Cristal Zafiro Plata .925</h4>
+                        <div class="product-rating">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="rating-count">(35 reseñas)</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="current-price">$1,150 MXN</span>
+                            <span class="regular-price">$1,450 MXN</span>
+                        </div>
+                        <div class="product-btn-group" onclick="event.stopPropagation()">
+                            <button class="btn btn-primary btn-sm add-to-cart-quick" data-id="prod-2" data-price="1150">
+                                <i class="fa-solid fa-bag-shopping"></i> Agregar
+                            </button>
+                            <a href="#" class="btn btn-whatsapp btn-sm btn-whatsapp-product" data-title="Gargantilla Corazón Cristal Zafiro" data-price="1150">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 3: Pulsera Tenis y Eslabones -->
+                <div class="product-card" data-category="pulseras" onclick="openProductDetail('prod-3')">
+                    <div class="product-image-wrap">
+                        <span class="product-badges">
+                            <span class="badge badge-hot">Edición Limitada</span>
+                            <span class="badge badge-silver">Plata .925</span>
+                        </span>
+                        <div class="product-actions-hover" onclick="event.stopPropagation()">
+                            <button class="action-icon-btn wishlist-btn" data-id="p3" onclick="toggleWishlist('p3', 'Brazalete Tennis & Eslabón Combinado')"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                        <img src="assets/images/pulsera-eslabones.jpg" alt="Brazalete Tennis de Plata .925">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-meta-tag">Pulseras Finas</span>
+                        <h4 class="product-title">Brazalete Tennis & Eslabón Doble Plata Italiana .925</h4>
+                        <div class="product-rating">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                            <span class="rating-count">(29 reseñas)</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="current-price">$1,590 MXN</span>
+                            <span class="regular-price">$1,990 MXN</span>
+                        </div>
+                        <div class="product-btn-group" onclick="event.stopPropagation()">
+                            <button class="btn btn-primary btn-sm add-to-cart-quick" data-id="prod-3" data-price="1590">
+                                <i class="fa-solid fa-bag-shopping"></i> Agregar
+                            </button>
+                            <a href="#" class="btn btn-whatsapp btn-sm btn-whatsapp-product" data-title="Brazalete Tennis Eslabón Plata" data-price="1590">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 4: Aretes Arracadas Micro-Pavé -->
+                <div class="product-card" data-category="aretes" onclick="openProductDetail('prod-4')">
+                    <div class="product-image-wrap">
+                        <span class="product-badges">
+                            <span class="badge badge-silver">Plata .925</span>
+                        </span>
+                        <div class="product-actions-hover" onclick="event.stopPropagation()">
+                            <button class="action-icon-btn wishlist-btn" data-id="p4" onclick="toggleWishlist('p4', 'Arracadas Huggies Pavé Plata')"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                        <img src="assets/images/aretes-arracadas.jpg" alt="Arracadas Huggies Pavé Plata .925">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-meta-tag">Aretes & Arracadas</span>
+                        <h4 class="product-title">Arracadas Huggies Micro-Pavé Circonias Plata .925</h4>
+                        <div class="product-rating">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="rating-count">(42 reseñas)</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="current-price">$890 MXN</span>
+                            <span class="regular-price">$1,100 MXN</span>
+                        </div>
+                        <div class="product-btn-group" onclick="event.stopPropagation()">
+                            <button class="btn btn-primary btn-sm add-to-cart-quick" data-id="prod-4" data-price="890">
+                                <i class="fa-solid fa-bag-shopping"></i> Agregar
+                            </button>
+                            <a href="#" class="btn btn-whatsapp btn-sm btn-whatsapp-product" data-title="Arracadas Huggies Micro-Pavé" data-price="890">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 5: Anillos Dúo Pareja -->
+                <div class="product-card" data-category="parejas" onclick="openProductDetail('prod-5')">
+                    <div class="product-image-wrap">
+                        <span class="product-badges">
+                            <span class="badge badge-hot">Dúo Especial</span>
+                            <span class="badge badge-silver">Plata .925</span>
+                        </span>
+                        <div class="product-actions-hover" onclick="event.stopPropagation()">
+                            <button class="action-icon-btn wishlist-btn" data-id="p5" onclick="toggleWishlist('p5', 'Dúo de Anillos de Pareja Eternidad')"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                        <img src="assets/images/anillos-pareja.jpg" alt="Dúo de Anillos de Pareja Plata .925">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-meta-tag">Joyería para Parejas</span>
+                        <h4 class="product-title">Dúo Anillos de Promesa 'Forever & Always' Plata .925</h4>
+                        <div class="product-rating">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="rating-count">(64 reseñas)</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="current-price">$2,190 MXN</span>
+                            <span class="regular-price">$2,790 MXN</span>
+                        </div>
+                        <div class="product-btn-group" onclick="event.stopPropagation()">
+                            <button class="btn btn-primary btn-sm add-to-cart-quick" data-id="prod-5" data-price="2190">
+                                <i class="fa-solid fa-bag-shopping"></i> Agregar
+                            </button>
+                            <a href="#" class="btn btn-whatsapp btn-sm btn-whatsapp-product" data-title="Dúo Anillos Pareja Forever" data-price="2190">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Medidor de Tallas CTA -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="ring-sizer-cta">
+                <div class="ring-sizer-content">
+                    <span class="section-subtitle">¿No conoces tu talla exacta?</span>
+                    <h2 class="text-gradient-silver">Medidor Virtual de Anillos en Pantalla</h2>
+                    <p>Nuestra herramienta interactiva te permite conocer tu talla precisa en segundos. Solo coloca tu anillo sobre la pantalla o calibra el círculo milimétrico.</p>
+                    <button class="btn btn-primary open-ring-sizer-btn">
+                        <i class="fa-solid fa-circle-dot"></i> Abrir Medidor Interactivo
+                    </button>
+                </div>
+                <div class="sizer-preview-visual">
+                    <div class="virtual-ring-sample">
+                        <span>Talla 7</span>
+                    </div>
+                    <p style="font-size:0.85rem; color:var(--color-silver-mid);">Calibración milimétrica para México y USA</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Unboxing y Certificado -->
+    <section class="section-padding" style="background: rgba(11, 15, 25, 0.85);">
+        <div class="container">
+            <div class="product-detail-grid" style="align-items: center;">
+                <div class="product-gallery-main">
+                    <img src="assets/images/empaque-certificado.jpg" alt="Empaque de Regalo y Certificado Joyería Angy">
+                </div>
+                <div>
+                    <span class="section-subtitle">Experiencia Unboxing Premium</span>
+                    <h2 class="text-gradient-silver" style="margin-bottom: 1.25rem;">Listo para Regalar o Sorprender</h2>
+                    <p style="margin-bottom: 1.25rem;">En Joyería Angy creemos que cada detalle cuenta. Por eso, cada joya se entrega cuidadosamente empacada en nuestro estuche rígido con moño de satén, bolsa de regalo y certificado oficial de autenticidad.</p>
+                    
+                    <div class="detail-specs-box">
+                        <div class="spec-item">
+                            <span class="spec-name"><i class="fa-solid fa-check" style="color:#38bdf8;"></i> Estuche Rígido Acolchado</span>
+                            <span class="spec-val">Incluido</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name"><i class="fa-solid fa-check" style="color:#38bdf8;"></i> Bolsa de Terciopelo Protectora</span>
+                            <span class="spec-val">Incluida</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name"><i class="fa-solid fa-check" style="color:#38bdf8;"></i> Certificado Plata Ley .925</span>
+                            <span class="spec-val">Firmado</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name"><i class="fa-solid fa-check" style="color:#38bdf8;"></i> Paño Abrillantador Especial</span>
+                            <span class="spec-val">De Regalo</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="switchView('catalogo')">
+                        <i class="fa-solid fa-gem"></i> Explorar Catálogo de Regalos
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Reseñas y Testimonios -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Opiniones de Nuestra Comunidad</span>
+                <h2 class="text-gradient-silver">Lo Que Dicen Quienes Ya Brillan Con Angy</h2>
+                <p>Más de 12,000 pedidos entregados con 99.8% de satisfacción garantizada.</p>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="glass-panel review-card">
+                    <div>
+                        <div class="product-rating" style="margin-bottom: 1rem;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-quote">"El anillo solitario superó por completo mis expectativas. El brillo de la circonia con la plata pulida es impresionante. A mi prometida le fascinó el estuche con el certificado."</p>
+                    </div>
+                    <div class="reviewer-profile">
+                        <div class="reviewer-avatar">CR</div>
+                        <div class="reviewer-info">
+                            <h5>Carlos Ramírez</h5>
+                            <span class="verified-buyer-badge"><i class="fa-solid fa-circle-check"></i> Comprador Verificado • CDMX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel review-card">
+                    <div>
+                        <div class="product-rating" style="margin-bottom: 1rem;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-quote">"Compré las arracadas y la gargantilla de corazón. La atención por WhatsApp fue súper rápida y me asesoraron con la talla. Llegó en 2 días a Guadalajara."</p>
+                    </div>
+                    <div class="reviewer-profile">
+                        <div class="reviewer-avatar">MG</div>
+                        <div class="reviewer-info">
+                            <h5>Mariana Gómez</h5>
+                            <span class="verified-buyer-badge"><i class="fa-solid fa-circle-check"></i> Comprador Verificado • Guadalajara</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel review-card">
+                    <div>
+                        <div class="product-rating" style="margin-bottom: 1rem;">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="review-quote">"La calidad de la plata .925 es legítima. Llevo 4 meses usándolo diario y se mantiene brillante e impecable. El medidor de la página acertó exactamente."</p>
+                    </div>
+                    <div class="reviewer-profile">
+                        <div class="reviewer-avatar">AV</div>
+                        <div class="reviewer-info">
+                            <h5>Andrea Villarreal</h5>
+                            <span class="verified-buyer-badge"><i class="fa-solid fa-circle-check"></i> Comprador Verificado • Monterrey</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- =========================================================================
+     VISTA 2: CATÁLOGO / TIENDA COMPLETA
+========================================================================= -->
+<div id="view-catalogo" class="page-view">
+    <main class="section-padding">
+        <div class="container">
+            <header class="section-header">
+                <span class="section-subtitle">Tienda Oficial de Plata .925 & Acero</span>
+                <h1 class="text-gradient-silver">Catálogo Completo de Joyería</h1>
+                <p>Explora nuestras exclusivas piezas artesanales con quintado oficial, garantía de por vida y opciones de compra directa en línea o por WhatsApp.</p>
+            </header>
+
+            <!-- Filtros de Pestañas -->
+            <div class="product-tabs" style="margin-bottom: 3rem;">
+                <button class="tab-btn active" data-category="all">Todas las Joyas (24)</button>
+                <button class="tab-btn" data-category="anillos">Anillos (8)</button>
+                <button class="tab-btn" data-category="collares">Collares & Dijes (6)</button>
+                <button class="tab-btn" data-category="pulseras">Pulseras (5)</button>
+                <button class="tab-btn" data-category="aretes">Aretes (5)</button>
+                <button class="tab-btn" data-category="parejas">Dúos de Pareja (4)</button>
+            </div>
+
+            <!-- Grid del Catálogo -->
+            <div class="products-grid">
+                
+                <!-- Item 1 -->
+                <div class="product-card" data-category="anillos" onclick="openProductDetail('prod-1')">
+                    <div class="product-image-wrap">
+                        <span class="product-badges">
+                            <span class="badge badge-hot">Más Vendido</span>
+                            <span class="badge badge-silver">Plata .925</span>
+                        </span>
+                        <div class="product-actions-hover" onclick="event.stopPropagation()">
+                            <button class="action-icon-btn wishlist-btn" data-id="p1" onclick="toggleWishlist('p1', 'Anillo Solitario Brillante .925')"><i class="fa-regular fa-heart"></i></button>
+                            <button class="action-icon-btn open-ring-sizer-btn"><i class="fa-solid fa-ruler"></i></button>
+                        </div>
+                        <img src="assets/images/anillo-solitario.jpg" alt="Anillo Solitario Plata .925">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-meta-tag">Anillos de Compromiso</span>
+                        <h4 class="product-title">Anillo Solitario Diamante Simulado Plata .925</h4>
+                        <div class="product-rating">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="rating-count">(48)</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="current-price">$1,290 MXN</span>
+                            <span class="regular-price">$1,650 MXN</span>
+                        </div>
+                        <div class="product-btn-group" onclick="event.stopPropagation()">
+                            <button class="btn btn-primary btn-sm add-to-cart-quick" data-id="prod-1" data-price="1290">
+                                <i class="fa-solid fa-bag-shopping"></i> Agregar
+                            </button>
+                            <a href="#" class="btn btn-whatsapp btn-sm btn-whatsapp-product" data-title="Anillo Solitario Plata .925" data-price="1290">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="product-card" data-category="collares" onclick="openProductDetail('prod-2')">
+                    <div class="product-image-wrap">
+                        <span class="product-badges">
+                            <span class="badge badge-sale">-20% OFF</span>
+                            <span class="badge badge-silver">Plata .925</span>
+                        </span>
+                        <div class="product-actions-hover" onclick="event.stopPropagation()">
+                            <button class="action-icon-btn wishlist-btn" data-id="p2" onclick="toggleWishlist('p2', 'Gargantilla Corazón de Cristal Zafiro')"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                        <img src="assets/images/collar-corazon.jpg" alt="Gargantilla Corazón de Cristal Zafiro">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-meta-tag">Collares & Dijes</span>
+                        <h4 class="product-title">Gargantilla Corazón de Cristal Zafiro Plata .925</h4>
+                        <div class="product-rating">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="rating-count">(35)</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="current-price">$1,150 MXN</span>
+                            <span class="regular-price">$1,450 MXN</span>
+                        </div>
+                        <div class="product-btn-group" onclick="event.stopPropagation()">
+                            <button class="btn btn-primary btn-sm add-to-cart-quick" data-id="prod-2" data-price="1150">
+                                <i class="fa-solid fa-bag-shopping"></i> Agregar
+                            </button>
+                            <a href="#" class="btn btn-whatsapp btn-sm btn-whatsapp-product" data-title="Gargantilla Corazón Cristal Zafiro" data-price="1150">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="product-card" data-category="pulseras" onclick="openProductDetail('prod-3')">
+                    <div class="product-image-wrap">
+                        <span class="product-badges">
+                            <span class="badge badge-hot">Edición Limitada</span>
+                            <span class="badge badge-silver">Plata .925</span>
+                        </span>
+                        <div class="product-actions-hover" onclick="event.stopPropagation()">
+                            <button class="action-icon-btn wishlist-btn" data-id="p3" onclick="toggleWishlist('p3', 'Brazalete Tennis & Eslabón Combinado')"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                        <img src="assets/images/pulsera-eslabones.jpg" alt="Brazalete Tennis de Plata .925">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-meta-tag">Pulseras Finas</span>
+                        <h4 class="product-title">Brazalete Tennis & Eslabón Doble Plata Italiana .925</h4>
+                        <div class="product-rating">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                            <span class="rating-count">(29)</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="current-price">$1,590 MXN</span>
+                            <span class="regular-price">$1,990 MXN</span>
+                        </div>
+                        <div class="product-btn-group" onclick="event.stopPropagation()">
+                            <button class="btn btn-primary btn-sm add-to-cart-quick" data-id="prod-3" data-price="1590">
+                                <i class="fa-solid fa-bag-shopping"></i> Agregar
+                            </button>
+                            <a href="#" class="btn btn-whatsapp btn-sm btn-whatsapp-product" data-title="Brazalete Tennis Eslabón Plata" data-price="1590">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="product-card" data-category="aretes" onclick="openProductDetail('prod-4')">
+                    <div class="product-image-wrap">
+                        <span class="product-badges">
+                            <span class="badge badge-silver">Plata .925</span>
+                        </span>
+                        <div class="product-actions-hover" onclick="event.stopPropagation()">
+                            <button class="action-icon-btn wishlist-btn" data-id="p4" onclick="toggleWishlist('p4', 'Arracadas Huggies Pavé Plata')"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                        <img src="assets/images/aretes-arracadas.jpg" alt="Arracadas Huggies Pavé Plata .925">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-meta-tag">Aretes & Arracadas</span>
+                        <h4 class="product-title">Arracadas Huggies Micro-Pavé Circonias Plata .925</h4>
+                        <div class="product-rating">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="rating-count">(42)</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="current-price">$890 MXN</span>
+                            <span class="regular-price">$1,100 MXN</span>
+                        </div>
+                        <div class="product-btn-group" onclick="event.stopPropagation()">
+                            <button class="btn btn-primary btn-sm add-to-cart-quick" data-id="prod-4" data-price="890">
+                                <i class="fa-solid fa-bag-shopping"></i> Agregar
+                            </button>
+                            <a href="#" class="btn btn-whatsapp btn-sm btn-whatsapp-product" data-title="Arracadas Huggies Micro-Pavé" data-price="890">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="product-card" data-category="parejas" onclick="openProductDetail('prod-5')">
+                    <div class="product-image-wrap">
+                        <span class="product-badges">
+                            <span class="badge badge-hot">Dúo Especial</span>
+                            <span class="badge badge-silver">Plata .925</span>
+                        </span>
+                        <div class="product-actions-hover" onclick="event.stopPropagation()">
+                            <button class="action-icon-btn wishlist-btn" data-id="p5" onclick="toggleWishlist('p5', 'Dúo de Anillos de Pareja Eternidad')"><i class="fa-regular fa-heart"></i></button>
+                        </div>
+                        <img src="assets/images/anillos-pareja.jpg" alt="Dúo de Anillos de Pareja Plata .925">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-meta-tag">Joyería para Parejas</span>
+                        <h4 class="product-title">Dúo Anillos de Promesa 'Forever & Always' Plata .925</h4>
+                        <div class="product-rating">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="rating-count">(64)</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="current-price">$2,190 MXN</span>
+                            <span class="regular-price">$2,790 MXN</span>
+                        </div>
+                        <div class="product-btn-group" onclick="event.stopPropagation()">
+                            <button class="btn btn-primary btn-sm add-to-cart-quick" data-id="prod-5" data-price="2190">
+                                <i class="fa-solid fa-bag-shopping"></i> Agregar
+                            </button>
+                            <a href="#" class="btn btn-whatsapp btn-sm btn-whatsapp-product" data-title="Dúo Anillos Pareja Forever" data-price="2190">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- =========================================================================
+     VISTA 3: FICHA DE PRODUCTO INDIVIDUAL (SINGLE PRODUCT)
+========================================================================= -->
+<div id="view-producto" class="page-view">
+    <main class="section-padding">
+        <div class="container">
+            
+            <div style="margin-bottom: 1.5rem;">
+                <button class="btn btn-outline-silver btn-sm" onclick="switchView('catalogo')">
+                    &larr; Volver al Catálogo
+                </button>
+            </div>
+
+            <div class="product-detail-grid">
+                
+                <!-- Galería -->
+                <div class="product-gallery-main">
+                    <img id="detailMainImage" src="assets/images/anillo-solitario.jpg" alt="Detalle de Joya">
+                </div>
+
+                <!-- Info -->
+                <div class="product-detail-info">
+                    <span class="product-meta-tag" id="detailMetaTag">Anillo de Compromiso • Plata .925</span>
+                    <h1 class="hero-title text-gradient-silver" id="detailTitle" style="font-size: clamp(2rem, 3.5vw, 2.8rem); margin-bottom: 0.8rem;">
+                        Anillo Solitario Diamante Simulado Plata .925
+                    </h1>
+
+                    <div class="product-rating" style="margin-bottom: 1.2rem;">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <span class="rating-count">(Calificación 4.9/5 • 48 compradores certificados)</span>
+                    </div>
+
+                    <div class="product-price-row" style="margin-bottom: 1.5rem;">
+                        <span class="current-price" id="detailPrice" style="font-size: 2.2rem;">$1,290.00 MXN</span>
+                        <span class="regular-price" id="detailOldPrice" style="font-size: 1.2rem;">$1,650.00 MXN</span>
+                    </div>
+
+                    <p id="detailDesc" style="margin-bottom: 1.5rem; line-height: 1.7;">
+                        Forjado a mano por expertos orfebres en auténtica Plata Esterlina Ley .925 con un deslumbrante centro de corte brillante redondo y micropavé en los laterales. Diseñado para una comodidad superior y un brillo inigualable que resiste el paso del tiempo.
+                    </p>
+
+                    <!-- Selector de Tallas con botón a Guía -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.5rem;">
+                            <label style="font-size: 0.9rem; font-weight:600; color:#ffffff;">Selecciona tu Talla:</label>
+                            <a href="javascript:void(0)" class="open-ring-sizer-btn" style="font-size: 0.82rem; color: #38bdf8; text-decoration: underline;">
+                                <i class="fa-solid fa-ruler-combined"></i> ¿Cómo saber mi talla exacta?
+                            </a>
+                        </div>
+                        <div class="size-selector-grid">
+                            <button type="button" class="size-pill">Talla 5</button>
+                            <button type="button" class="size-pill">Talla 6</button>
+                            <button type="button" class="size-pill selected">Talla 7</button>
+                            <button type="button" class="size-pill">Talla 8</button>
+                            <button type="button" class="size-pill">Talla 9</button>
+                            <button type="button" class="size-pill">Talla 10</button>
+                        </div>
+                    </div>
+
+                    <!-- Ficha de Especificaciones Rápidas -->
+                    <div class="detail-specs-box">
+                        <div class="spec-item">
+                            <span class="spec-name">Metal Principal:</span>
+                            <span class="spec-val">Plata Ley .925 Quintada</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name">Gema / Circonia:</span>
+                            <span class="spec-val">Circonia Cúbica 5A Grado Diamante</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name">Empaque Incluido:</span>
+                            <span class="spec-val">Estuche Rígido + Bolsa de Terciopelo + Moño</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name">Envío a Domicilio:</span>
+                            <span class="spec-val">Express 24 a 48 hrs a todo México</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name">Garantía:</span>
+                            <span class="spec-val">Certificado Oficial de Autenticidad</span>
+                        </div>
+                    </div>
+
+                    <!-- Acciones de Compra -->
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem;">
+                        <button type="button" class="btn btn-primary" id="detailAddToCartBtn" style="width: 100%;">
+                            <i class="fa-solid fa-bag-shopping"></i> Añadir a mi Carrito
+                        </button>
+                        <a href="#" id="detailWhatsAppBtn" target="_blank" class="btn btn-whatsapp" style="width: 100%;">
+                            <i class="fa-brands fa-whatsapp"></i> Comprar Directo por WhatsApp
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- =========================================================================
+     VISTA 4: MEDIDOR VIRTUAL DE TALLAS (RING SIZER)
+========================================================================= -->
+<div id="view-tallas" class="page-view">
+    <main class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Precisión y Comodidad</span>
+                <h1 class="text-gradient-silver">Guía y Medidor Virtual de Tallas</h1>
+                <p>Descubre tu talla exacta de anillo con nuestras herramientas interactivas y tablas de equivalencia oficial para México y USA.</p>
+            </div>
+
+            <div class="glass-panel" style="padding: 3rem 2rem; max-width: 850px; margin: 0 auto 4rem auto; text-align: center;">
+                <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;" class="text-gradient-silver">Calibrador Virtual en Pantalla</h2>
+                <p style="font-size: 0.95rem; margin-bottom: 2rem;">Coloca un anillo que uses habitualmente sobre el círculo y ajusta el deslizador hasta que el círculo interior coincida con el borde de tu anillo.</p>
+
+                <div class="sizer-calibration-tool">
+                    <div class="interactive-circle-target" id="pageSizerCircle" style="width: 99px; height: 99px;">
+                        <span style="font-size: 0.8rem; color: #94a3b8;"><i class="fa-solid fa-ring"></i></span>
+                    </div>
+                    <p style="font-size: 0.82rem; color: var(--color-silver-glow); margin-bottom: 0.8rem;">Desliza para cambiar la escala:</p>
+                    <input type="range" min="0" max="15" value="6" class="sizer-slider-input" id="pageSizerSlider">
+                    
+                    <div class="sizer-values-display">
+                        <div class="sizer-box-val">
+                            <h3 id="pageSizerSizeVal">Talla 7</h3>
+                            <p>Estándar México / USA</p>
+                        </div>
+                        <div class="sizer-box-val">
+                            <h3 id="pageSizerMmVal">17.3 mm</h3>
+                            <p>Diámetro Interior</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button class="btn btn-primary" onclick="switchView('catalogo', 'anillos')">
+                        <i class="fa-solid fa-gem"></i> Explorar Anillos con esta Talla
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabla de Tallas -->
+            <div class="glass-panel" style="padding: 2.5rem; max-width: 950px; margin: 0 auto;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;" class="text-gradient-silver">Tabla Oficial de Medidas de Anillos</h3>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem; text-align: left;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid var(--border-silver); color: #ffffff;">
+                                <th style="padding: 0.85rem 1rem;">Talla (MX / USA)</th>
+                                <th style="padding: 0.85rem 1rem;">Diámetro Interior (mm)</th>
+                                <th style="padding: 0.85rem 1rem;">Circunferencia del Dedo (mm)</th>
+                                <th style="padding: 0.85rem 1rem;">Recomendación Típica</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--border-glass);">
+                                <td style="padding: 0.85rem 1rem; font-weight: 600; color: #38bdf8;">Talla 5</td>
+                                <td style="padding: 0.85rem 1rem;">15.7 mm</td>
+                                <td style="padding: 0.85rem 1rem;">49.3 mm</td>
+                                <td style="padding: 0.85rem 1rem; color: var(--color-silver-mid);">Dedo meñique o manos muy delgadas</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-glass);">
+                                <td style="padding: 0.85rem 1rem; font-weight: 600; color: #38bdf8;">Talla 6</td>
+                                <td style="padding: 0.85rem 1rem;">16.5 mm</td>
+                                <td style="padding: 0.85rem 1rem;">51.8 mm</td>
+                                <td style="padding: 0.85rem 1rem; color: var(--color-silver-mid);">Talla promedio mujer (anular)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-glass); background: rgba(56, 189, 248, 0.05);">
+                                <td style="padding: 0.85rem 1rem; font-weight: 700; color: #ffffff;">Talla 7 (Más Común)</td>
+                                <td style="padding: 0.85rem 1rem; font-weight: 700; color: #ffffff;">17.3 mm</td>
+                                <td style="padding: 0.85rem 1rem; font-weight: 700; color: #ffffff;">54.4 mm</td>
+                                <td style="padding: 0.85rem 1rem; color: #ffffff;">Talla estándar mujer (anular / medio)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-glass);">
+                                <td style="padding: 0.85rem 1rem; font-weight: 600; color: #38bdf8;">Talla 8</td>
+                                <td style="padding: 0.85rem 1rem;">18.1 mm</td>
+                                <td style="padding: 0.85rem 1rem;">56.9 mm</td>
+                                <td style="padding: 0.85rem 1rem; color: var(--color-silver-mid);">Talla mujer medio / Talla hombre delgado</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-glass);">
+                                <td style="padding: 0.85rem 1rem; font-weight: 600; color: #38bdf8;">Talla 9</td>
+                                <td style="padding: 0.85rem 1rem;">18.9 mm</td>
+                                <td style="padding: 0.85rem 1rem;">59.5 mm</td>
+                                <td style="padding: 0.85rem 1rem; color: var(--color-silver-mid);">Talla promedio hombre (anular)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-glass); background: rgba(56, 189, 248, 0.05);">
+                                <td style="padding: 0.85rem 1rem; font-weight: 700; color: #ffffff;">Talla 10 (Hombre Común)</td>
+                                <td style="padding: 0.85rem 1rem; font-weight: 700; color: #ffffff;">19.8 mm</td>
+                                <td style="padding: 0.85rem 1rem; font-weight: 700; color: #ffffff;">62.1 mm</td>
+                                <td style="padding: 0.85rem 1rem; color: #ffffff;">Talla estándar hombre (anular / medio)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- =========================================================================
+     VISTA 5: GUÍA DE CUIDADOS DE LA PLATA
+========================================================================= -->
+<div id="view-cuidados" class="page-view">
+    <main class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Consejos de Maestros Joyeros</span>
+                <h1 class="text-gradient-silver">Guía de Cuidado de la Plata Ley .925</h1>
+                <p>La plata esterlina es un metal noble que puede mantener su brillo radiante por generaciones. Sigue estos sencillos secretos para conservarla siempre impecable.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; max-width: 1100px; margin: 0 auto 4rem auto;">
+                
+                <div class="glass-panel" style="padding: 2rem;">
+                    <div class="trust-icon-box" style="margin-bottom: 1.25rem;">
+                        <i class="fa-solid fa-sparkles" style="color: #38bdf8;"></i>
+                    </div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem; color: #ffffff;">1. El Mejor Mantenimiento es Usarla</h3>
+                    <p style="font-size: 0.92rem; color: var(--color-silver-mid);">Los aceites naturales de tu propia piel ayudan a limpiar y mantener la plata pulida. Usar tus joyas Angy con frecuencia evita de forma natural que el metal se opaque.</p>
+                </div>
+
+                <div class="glass-panel" style="padding: 2rem;">
+                    <div class="trust-icon-box" style="margin-bottom: 1.25rem;">
+                        <i class="fa-solid fa-spray-can-sparkles" style="color: #eab308;"></i>
+                    </div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem; color: #ffffff;">2. La Regla de Oro: Lo Último en Ponerse</h3>
+                    <p style="font-size: 0.92rem; color: var(--color-silver-mid);">Colócate tus joyas después de aplicar perfumes, cremas corporales o lociones. Los químicos cosméticos pueden acelerar la sulfuración de la plata.</p>
+                </div>
+
+                <div class="glass-panel" style="padding: 2rem;">
+                    <div class="trust-icon-box" style="margin-bottom: 1.25rem;">
+                        <i class="fa-solid fa-box-archive" style="color: #25d366;"></i>
+                    </div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem; color: #ffffff;">3. Almacenamiento Hermético</h3>
+                    <p style="font-size: 0.92rem; color: var(--color-silver-mid);">Cuando no estés usando tus piezas, guárdalas en la bolsa de terciopelo que incluimos en tu paquete de Joyería Angy, en un lugar seco y fresco.</p>
+                </div>
+
+                <div class="glass-panel" style="padding: 2rem;">
+                    <div class="trust-icon-box" style="margin-bottom: 1.25rem;">
+                        <i class="fa-solid fa-hand-sparkles" style="color: #cbd5e1;"></i>
+                    </div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem; color: #ffffff;">4. Uso del Paño Abrillantador</h3>
+                    <p style="font-size: 0.92rem; color: var(--color-silver-mid);">Frota suavemente tus joyas en línea recta con el paño especial micro-impregnado para remover huellas y devolver el reflejo tipo espejo al instante.</p>
+                </div>
+
+                <div class="glass-panel" style="padding: 2rem;">
+                    <div class="trust-icon-box" style="margin-bottom: 1.25rem;">
+                        <i class="fa-solid fa-water-ladder" style="color: #ef4444;"></i>
+                    </div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem; color: #ffffff;">5. Evita Albercas y Aguas Termales</h3>
+                    <p style="font-size: 0.92rem; color: var(--color-silver-mid);">El cloro de las piscinas y el azufre presente en aguas termales o saunas pueden obscurecer la plata en minutos. Retira tus piezas antes de nadar.</p>
+                </div>
+
+                <div class="glass-panel" style="padding: 2rem;">
+                    <div class="trust-icon-box" style="margin-bottom: 1.25rem;">
+                        <i class="fa-solid fa-shield-halved" style="color: #38bdf8;"></i>
+                    </div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 0.75rem; color: #ffffff;">6. Joyería en Acero Quirúrgico 316L</h3>
+                    <p style="font-size: 0.92rem; color: var(--color-silver-mid);">Nuestras piezas en acero inoxidable 316L son 100% resistentes al agua, no se oxidan, no pierden color y son ideales para uso continuo sin preocupaciones.</p>
+                </div>
+
+            </div>
+
+            <div class="glass-panel" style="padding: 2.5rem; max-width: 800px; margin: 0 auto; text-align: center;">
+                <h3 class="text-gradient-silver" style="font-size: 1.6rem; margin-bottom: 0.75rem;">¿Tienes alguna duda sobre tu joya?</h3>
+                <p style="margin-bottom: 1.5rem;">Nuestro equipo de maestros plateros está listo para asesorarte directamente por WhatsApp.</p>
+                <a href="https://wa.me/5215512345678?text=Hola%20Joyer%C3%ADa%20Angy,%20tengo%20una%20duda%20sobre%20el%20cuidado%20de%20mi%20plata" target="_blank" class="btn btn-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> Hablar con un Asesor de Joyería
+                </a>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- =========================================================================
+     VISTA 6: CONTACTO & MAYOREO
+========================================================================= -->
+<div id="view-contacto" class="page-view">
+    <main class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Estamos a tu Servicio</span>
+                <h1 class="text-gradient-silver">Contacto & Atención Personalizada</h1>
+                <p>¿Tienes dudas sobre un modelo, requieres una talla especial o deseas catálogo de precios por mayoreo? Escríbenos.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; max-width: 1100px; margin: 0 auto;">
+                
+                <div>
+                    <div class="glass-panel" style="padding: 2rem; margin-bottom: 1.5rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div class="trust-icon-box" style="background: rgba(37, 211, 102, 0.1); border-color: #25d366;">
+                                <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i>
+                            </div>
+                            <div>
+                                <h4 style="font-size: 1.1rem; color: #ffffff;">WhatsApp Concierge</h4>
+                                <p style="font-size: 0.85rem; color: #38bdf8;">Respuesta en menos de 10 minutos</p>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.92rem; margin-bottom: 1.25rem;">Atención inmediata de pedidos, fotos adicionales de las piezas y confirmación de stock en tiempo real.</p>
+                        <a href="https://wa.me/5215512345678?text=Hola%20Joyer%C3%ADa%20Angy,%20deseo%20m%C3%A1s%20informaci%C3%B3n" target="_blank" class="btn btn-whatsapp" style="width: 100%;">
+                            <i class="fa-brands fa-whatsapp"></i> Chatear por WhatsApp
+                        </a>
+                    </div>
+
+                    <div class="glass-panel" style="padding: 2rem;">
+                        <h4 style="font-size: 1.1rem; color: #ffffff; margin-bottom: 1rem;">Ventas por Mayoreo</h4>
+                        <p style="font-size: 0.92rem; margin-bottom: 1rem; color: var(--color-silver-mid);">Inicia o haz crecer tu negocio de joyería fina con nuestros paquetes especiales de mayoreo en plata .925 y acero con hasta 50% de margen de ganancia.</p>
+                        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.88rem; color: var(--color-silver-light); margin-bottom: 1.25rem;">
+                            <li><i class="fa-solid fa-check" style="color: #38bdf8; margin-right: 6px;"></i> Mínimo de compra accesible ($3,000 MXN)</li>
+                            <li><i class="fa-solid fa-check" style="color: #38bdf8; margin-right: 6px;"></i> Certificados .925 y empaques incluidos</li>
+                            <li><i class="fa-solid fa-check" style="color: #38bdf8; margin-right: 6px;"></i> Envíos asegurados a toda la República</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="glass-panel" style="padding: 2.5rem;">
+                    <h3 class="text-gradient-silver" style="font-size: 1.6rem; margin-bottom: 0.5rem;">Envíanos un Mensaje</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">Completa el formulario y te responderemos por correo o WhatsApp hoy mismo.</p>
+
+                    <form onsubmit="event.preventDefault(); window.showToast('✨ Mensaje enviado con éxito. Te responderemos pronto.');" style="display: flex; flex-direction: column; gap: 1.2rem;">
+                        <div>
+                            <label style="display: block; font-size: 0.85rem; color: var(--color-silver-glow); margin-bottom: 0.35rem;">Nombre Completo</label>
+                            <input type="text" class="newsletter-input" style="width: 100%;" placeholder="Ej. Ana Martínez" required>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <label style="display: block; font-size: 0.85rem; color: var(--color-silver-glow); margin-bottom: 0.35rem;">Teléfono / WhatsApp</label>
+                                <input type="tel" class="newsletter-input" style="width: 100%;" placeholder="Ej. 55 1234 5678" required>
+                            </div>
+                            <div>
+                                <label style="display: block; font-size: 0.85rem; color: var(--color-silver-glow); margin-bottom: 0.35rem;">Correo Electrónico</label>
+                                <input type="email" class="newsletter-input" style="width: 100%;" placeholder="ana@ejemplo.com" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label style="display: block; font-size: 0.85rem; color: var(--color-silver-glow); margin-bottom: 0.35rem;">Motivo de tu consulta</label>
+                            <select class="newsletter-input" style="width: 100%; background: #0f172a; color: #ffffff;">
+                                <option value="duda">Duda sobre una pieza o modelo</option>
+                                <option value="talla">Asesoría para elegir talla</option>
+                                <option value="mayoreo">Información de catálogo por Mayoreo</option>
+                                <option value="pedido">Estatus de mi pedido en curso</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label style="display: block; font-size: 0.85rem; color: var(--color-silver-glow); margin-bottom: 0.35rem;">Mensaje o Comentarios</label>
+                            <textarea rows="4" class="newsletter-input" style="width: 100%; resize: vertical;" placeholder="Escribe aquí tu consulta..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="margin-top: 0.5rem;">
+                            <i class="fa-solid fa-paper-plane"></i> Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- =========================================================================
+     NEWSLETTER & FOOTER
+========================================================================= -->
+<section class="section-padding" style="background: linear-gradient(180deg, var(--bg-main) 0%, rgba(15, 23, 42, 0.5) 100%);">
+    <div class="container">
+        <div class="newsletter-banner">
+            <span class="section-subtitle">Únete al Club Exclusivo</span>
+            <h2 class="text-gradient-silver">Recibe 10% OFF en tu Primera Compra</h2>
+            <p>Suscríbete para acceder a lanzamientos secretos de piezas en plata .925, promociones de aniversario y guías de joyería fina.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); window.showToast('✨ ¡Gracias por suscribirte! Código de cupón: ANGY10');">
+                <input type="email" placeholder="Ingresa tu correo electrónico..." class="newsletter-input" required>
+                <button type="submit" class="btn btn-primary">Obtener Descuento</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            
+            <div class="footer-col">
+                <div class="site-brand" style="margin-bottom: 1.25rem;">
+                    <a href="javascript:void(0)" onclick="switchView('inicio')">
+                        <span class="brand-name">Joyería Angy</span>
+                    </a>
+                    <span class="brand-subtitle">Plata Ley .925 & Acero</span>
+                </div>
+                <p style="margin-bottom: 1.5rem; font-size: 0.92rem;">Especialistas en joyería fina de plata esterlina ley .925 y acero quirúrgico 316L. Diseños exclusivos, acabados de alta gama y brillo garantizado de por vida.</p>
+                <div style="display: flex; gap: 0.75rem;">
+                    <a href="https://instagram.com" target="_blank" class="icon-action-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://facebook.com" target="_blank" class="icon-action-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://tiktok.com" target="_blank" class="icon-action-btn" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://wa.me/5215512345678" target="_blank" class="icon-action-btn" title="WhatsApp" style="color:#25d366;"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Colecciones</h4>
+                <ul class="footer-links">
+                    <li><a href="javascript:void(0)" onclick="switchView('catalogo', 'anillos')" class="footer-link">Anillos de Compromiso y Promesa</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('catalogo', 'collares')" class="footer-link">Gargantillas y Dijes con Cristal</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('catalogo', 'pulseras')" class="footer-link">Pulseras y Brazaletes Eslabón</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('catalogo', 'aretes')" class="footer-link">Aretes y Arracadas Micro-Pavé</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('catalogo', 'parejas')" class="footer-link">Dúos y Anillos para Pareja</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Servicio al Cliente</h4>
+                <ul class="footer-links">
+                    <li><a href="javascript:void(0)" class="footer-link open-ring-sizer-btn">Medidor Virtual de Anillos</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('cuidados')" class="footer-link">Guía de Limpieza de Plata .925</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('contacto')" class="footer-link">Tiempos de Envío y Paqueterías</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('cuidados')" class="footer-link">Certificado de Autenticidad</a></li>
+                    <li><a href="javascript:void(0)" onclick="switchView('contacto')" class="footer-link">Ventas por Mayoreo</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contacto & Pedidos</h4>
+                <p style="font-size: 0.9rem; margin-bottom: 0.6rem;"><i class="fa-solid fa-location-dot" style="color:#38bdf8; margin-right:6px;"></i> Envíos Seguros a Todo México</p>
+                <p style="font-size: 0.9rem; margin-bottom: 0.6rem;"><i class="fa-brands fa-whatsapp" style="color:#25d366; margin-right:6px;"></i> +52 1 (55) 1234-5678</p>
+                <p style="font-size: 0.9rem; margin-bottom: 0.6rem;"><i class="fa-solid fa-envelope" style="color:#cbd5e1; margin-right:6px;"></i> contacto@joyeriaangy.com</p>
+                <p style="font-size: 0.9rem;"><i class="fa-regular fa-clock" style="color:#cbd5e1; margin-right:6px;"></i> Lun - Sáb: 9:00 AM - 8:00 PM</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p style="font-size: 0.85rem;">&copy; 2026 <strong>Joyería Angy</strong>. Todos los derechos reservados. Plata Ley .925 y Acero Inoxidable.</p>
+            <div class="payment-badges">
+                <span class="pay-badge"><i class="fa-brands fa-cc-visa"></i> Visa</span>
+                <span class="pay-badge"><i class="fa-brands fa-cc-mastercard"></i> Mastercard</span>
+                <span class="pay-badge"><i class="fa-brands fa-paypal"></i> PayPal</span>
+                <span class="pay-badge">Mercado Pago</span>
+                <span class="pay-badge">OXXO / SPEI</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Mini-Carrito Drawer -->
+<div class="cart-drawer-overlay" id="cartDrawerOverlay">
+    <div class="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3 class="cart-drawer-title"><i class="fa-solid fa-bag-shopping" style="color: #38bdf8; margin-right: 8px;"></i> Tu Carrito de Joyas</h3>
+            <button class="close-drawer-btn" id="closeDrawerBtn" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="cart-shipping-bar">
+            <span id="shippingProgressText">Agrega <strong>$209.00 MXN</strong> más para <strong>Envío Gratis Express</strong></span>
+            <div class="progress-track">
+                <div class="progress-fill" style="width: 75%;"></div>
+            </div>
+        </div>
+
+        <div class="cart-items-list" id="cartItemsList"></div>
+
+        <div class="cart-drawer-footer">
+            <div class="cart-subtotal-row">
+                <span>Subtotal:</span>
+                <strong id="cartSubtotal">$1,290.00 MXN</strong>
+            </div>
+            <p style="font-size:0.75rem; color:var(--color-silver-glow); margin-bottom:1rem; text-align:center;">✨ Incluye estuche de regalo, bolsa de terciopelo y certificado .925</p>
+            <div class="cart-footer-buttons">
+                <a href="#" id="whatsappCartBtn" target="_blank" class="btn btn-whatsapp" style="width: 100%;">
+                    <i class="fa-brands fa-whatsapp"></i> Finalizar Pedido por WhatsApp
+                </a>
+                <button class="btn btn-primary" onclick="showToast('🛍️ Redirigiendo a pasarela segura de pago...');" style="width: 100%;">
+                    <i class="fa-solid fa-lock"></i> Pagar con Tarjeta / Mercado Pago
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Medidor Virtual de Anillos -->
+<div class="modal-overlay" id="ringSizerModal">
+    <div class="modal-box">
+        <button class="close-modal-btn" id="closeRingSizerBtn"><i class="fa-solid fa-xmark"></i></button>
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <span class="section-subtitle">Herramienta Interactiva</span>
+            <h2 class="text-gradient-silver" style="font-size: 2rem;">Medidor Virtual de Anillos</h2>
+            <p style="font-size: 0.92rem; margin-top: 0.4rem;">Coloca un anillo que uses habitualmente sobre la pantalla o ajusta el control deslizante hasta que el círculo coincida exactamente con el borde interior de tu anillo.</p>
+        </div>
+
+        <div class="sizer-calibration-tool">
+            <div class="interactive-circle-target" id="sizerCircle" style="width: 99px; height: 99px;">
+                <span style="font-size: 0.8rem; color: #94a3b8;"><i class="fa-solid fa-ring"></i></span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--color-silver-glow); margin-bottom: 0.8rem;">Desliza para calibrar el diámetro interior:</p>
+            <input type="range" min="0" max="15" value="6" class="sizer-slider-input" id="sizerSlider">
+            
+            <div class="sizer-values-display">
+                <div class="sizer-box-val">
+                    <h3 id="sizerSizeValue">Talla 7</h3>
+                    <p>Estándar México / USA</p>
+                </div>
+                <div class="sizer-box-val">
+                    <h3 id="sizerMmValue">17.3 mm</h3>
+                    <p>Diámetro Interior Exacto</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); padding: 1rem; font-size: 0.85rem; color: var(--color-silver-mid);">
+            <strong style="color: #ffffff;"><i class="fa-solid fa-lightbulb" style="color:#eab308; margin-right: 5px;"></i> Consejo de Joyero:</strong> Si dudas entre dos tallas, siempre te recomendamos la talla superior para mayor comodidad.
+        </div>
+
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <button class="btn btn-primary" onclick="document.getElementById('closeRingSizerBtn').click(); showToast('✨ Talla guardada con éxito.');">Guardar mi Talla</button>
+        </div>
+    </div>
+</div>
+
+<!-- Botón Flotante WhatsApp -->
+<a href="https://wa.me/5215512345678?text=Hola%20Joyer%C3%ADa%20Angy,%20quisiera%20asesor%C3%ADa%20para%20elegir%20una%20joya%20en%20plata%20.925" target="_blank" class="whatsapp-floating-btn" title="Atención Inmediata por WhatsApp">
+    <div class="whatsapp-pulse-ring"></div>
+    <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<!-- Toasts -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Scripts -->
+<script src="assets/js/app.js"></script>
+
+<script>
+    // Catálogo de Productos para la Vista de Detalle
+    const PRODUCTS_DATA = {
+        'prod-1': {
+            id: 'prod-1',
+            title: 'Anillo Solitario Diamante Simulado Plata .925',
+            meta: 'Anillos de Compromiso • Plata .925',
+            price: 1290,
+            oldPrice: 1650,
+            image: 'assets/images/anillo-solitario.jpg',
+            desc: 'Forjado a mano por expertos orfebres en auténtica Plata Esterlina Ley .925 con un deslumbrante centro de corte brillante redondo y micropavé en los laterales. Diseñado para una comodidad superior y un brillo inigualable.'
+        },
+        'prod-2': {
+            id: 'prod-2',
+            title: 'Gargantilla Corazón de Cristal Zafiro Plata .925',
+            meta: 'Collares & Dijes • Plata .925',
+            price: 1150,
+            oldPrice: 1450,
+            image: 'assets/images/collar-corazon.jpg',
+            desc: 'Collar de cadena veneciana en plata esterlina .925 con un dije de corazón en cristal azul zafiro facetado, rodeado de delicada filigrana de plata pulida con acabado rodio anti-deslustre.'
+        },
+        'prod-3': {
+            id: 'prod-3',
+            title: 'Brazalete Tennis & Eslabón Doble Plata Italiana .925',
+            meta: 'Pulseras Finas • Plata .925',
+            price: 1590,
+            oldPrice: 1990,
+            image: 'assets/images/pulsera-eslabones.jpg',
+            desc: 'Fusión de lujo entre un clásico brazalete tennis con circonias engastadas a 4 uñas y eslabones dobles de plata italiana con broche de seguridad tipo langosta.'
+        },
+        'prod-4': {
+            id: 'prod-4',
+            title: 'Arracadas Huggies Micro-Pavé Circonias Plata .925',
+            meta: 'Aretes & Arracadas • Plata .925',
+            price: 890,
+            oldPrice: 1100,
+            image: 'assets/images/aretes-arracadas.jpg',
+            desc: 'Arracadas huggies de diseño curvo con triple hilera de circonias micropavé. Cierre de presión seguro y cómodo para uso diario en plata hipoalergénica.'
+        },
+        'prod-5': {
+            id: 'prod-5',
+            title: "Dúo Anillos de Promesa 'Forever & Always' Plata .925",
+            meta: 'Joyería para Parejas • Plata .925',
+            price: 2190,
+            oldPrice: 2790,
+            image: 'assets/images/anillos-pareja.jpg',
+            desc: 'Par de anillos de promesa para pareja. Una argolla lisa de plata satinada y una churumbela completa de circonias brillantes. Incluye grabado de texto gratuito en el interior.'
+        }
+    };
+
+    let currentSelectedProduct = PRODUCTS_DATA['prod-1'];
+
+    function switchView(viewName, filterCategory) {
+        document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active-view'));
+        document.querySelectorAll('.view-pill-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+
+        const targetView = document.getElementById(`view-${viewName}`);
+        if (targetView) {
+            targetView.classList.add('active-view');
+        }
+
+        const pillBtn = document.querySelector(`.view-pill-btn[onclick*="${viewName}"]`);
+        if (pillBtn) pillBtn.classList.add('active');
+
+        const navLink = document.getElementById(`nav-${viewName}`);
+        if (navLink) navLink.classList.add('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        if (filterCategory && viewName === 'catalogo') {
+            const catBtn = document.querySelector(`#view-catalogo .tab-btn[data-category="${filterCategory}"]`);
+            if (catBtn) catBtn.click();
+        }
+    }
+
+    function openProductDetail(productId) {
+        const prod = PRODUCTS_DATA[productId] || PRODUCTS_DATA['prod-1'];
+        currentSelectedProduct = prod;
+
+        document.getElementById('detailMainImage').src = prod.image;
+        document.getElementById('detailTitle').textContent = prod.title;
+        document.getElementById('detailMetaTag').textContent = prod.meta;
+        document.getElementById('detailPrice').textContent = `$${prod.price.toLocaleString('es-MX')}.00 MXN`;
+        document.getElementById('detailOldPrice').textContent = `$${prod.oldPrice.toLocaleString('es-MX')}.00 MXN`;
+        document.getElementById('detailDesc').textContent = prod.desc;
+
+        // Configurar botón WhatsApp
+        const waMsg = `💍 *¡Hola Joyería Angy!* Deseo comprar la pieza: *${prod.title}* ($${prod.price} MXN) en Plata Ley .925. ¿Tienen disponibilidad?`;
+        document.getElementById('detailWhatsAppBtn').href = `https://wa.me/5215512345678?text=${encodeURIComponent(waMsg)}`;
+
+        switchView('producto');
+    }
+
+    document.getElementById('detailAddToCartBtn')?.addEventListener('click', () => {
+        const selectedSize = document.querySelector('#view-producto .size-pill.selected')?.textContent.trim() || '7';
+        window.addToCart({
+            id: currentSelectedProduct.id,
+            title: currentSelectedProduct.title,
+            price: currentSelectedProduct.price,
+            size: selectedSize,
+            image: currentSelectedProduct.image,
+            qty: 1
+        });
+    });
+
+    // Medidor de tallas en la página de tallas
+    const ringSizesMap = [
+        { size: '4', mm: 14.9, px: 75 },
+        { size: '4.5', mm: 15.3, px: 79 },
+        { size: '5', mm: 15.7, px: 83 },
+        { size: '5.5', mm: 16.1, px: 87 },
+        { size: '6', mm: 16.5, px: 91 },
+        { size: '6.5', mm: 16.9, px: 95 },
+        { size: '7', mm: 17.3, px: 99 },
+        { size: '7.5', mm: 17.7, px: 103 },
+        { size: '8', mm: 18.1, px: 107 },
+        { size: '8.5', mm: 18.5, px: 111 },
+        { size: '9', mm: 18.9, px: 115 },
+        { size: '9.5', mm: 19.4, px: 119 },
+        { size: '10', mm: 19.8, px: 123 },
+        { size: '10.5', mm: 20.2, px: 127 },
+        { size: '11', mm: 20.6, px: 131 },
+        { size: '12', mm: 21.4, px: 139 }
+    ];
+
+    const pageSizerSlider = document.getElementById('pageSizerSlider');
+    const pageSizerCircle = document.getElementById('pageSizerCircle');
+    const pageSizerSizeVal = document.getElementById('pageSizerSizeVal');
+    const pageSizerMmVal = document.getElementById('pageSizerMmVal');
+
+    pageSizerSlider?.addEventListener('input', (e) => {
+        const index = Math.min(Math.max(parseInt(e.target.value, 10), 0), ringSizesMap.length - 1);
+        const data = ringSizesMap[index];
+        if (pageSizerCircle) {
+            pageSizerCircle.style.width = `${data.px}px`;
+            pageSizerCircle.style.height = `${data.px}px`;
+        }
+        if (pageSizerSizeVal) pageSizerSizeVal.textContent = `Talla ${data.size}`;
+        if (pageSizerMmVal) pageSizerMmVal.textContent = `${data.mm} mm de diámetro`;
+    });
+</script>
+</body>
+</html>
