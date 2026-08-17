@@ -4,8 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Configuración de WhatsApp de la Joyería
-  const JOYERIA_WHATSAPP = '5215512345678'; // Número editable desde Personalizador de WordPress o Ajustes
+  const JOYERIA_WHATSAPP = (typeof joyeriaAngyData !== 'undefined' && joyeriaAngyData.whatsapp) ? joyeriaAngyData.whatsapp : '5215512345678';
 
   // 1. Estado Global del Carrito y Favoritos
   let cart = JSON.parse(localStorage.getItem('joyeria_angy_cart')) || [
@@ -195,37 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cartDrawerOverlay?.classList.add('active');
   };
 
-  // 6. Botones directos de compra en el catálogo
-  document.querySelectorAll('.add-to-cart-quick').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const card = btn.closest('.product-card') || btn.closest('.product-detail-info');
-      if (!card) return;
-      const product = {
-        id: btn.dataset.id || `prod-${Math.random().toString(36).substr(2, 5)}`,
-        title: card.querySelector('.product-title')?.textContent.trim() || 'Joya Plata .925',
-        price: parseFloat(btn.dataset.price || '990'),
-        size: card.querySelector('.size-pill.selected')?.textContent.trim() || '7',
-        image: card.querySelector('img')?.src || 'assets/images/anillo-solitario.jpg',
-        qty: 1
-      };
-      window.addToCart(product);
-    });
-  });
-
-  // 7. Botón Comprar Directo por WhatsApp por Producto
-  document.querySelectorAll('.btn-whatsapp-product').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const title = btn.dataset.title || 'Joya de Plata .925';
-      const price = btn.dataset.price || '990';
-      const size = btn.dataset.size || '7';
-      const msg = `💍 *¡Hola Joyería Angy! Me interesa comprar esta joya:*%0A%0A*Producto:* ${title}%0A*Precio:* $${price} MXN%0A*Talla deseada:* ${size}%0A*Material:* Plata Ley .925 Garantizada%0A%0A¿Tienen disponibilidad para envío inmediato?`;
-      btn.href = `https://wa.me/${JOYERIA_WHATSAPP}?text=${msg}`;
-    });
-  });
-
-  // 8. Medidor Virtual de Tallas de Anillos (Ring Sizer)
-  // Mapeo preciso de milímetros de diámetro interior a Talla de Anillo (Estándar México / USA)
+  // 6. Medidor Virtual de Tallas de Anillos (Ring Sizer)
   const ringSizesMap = [
     { size: '4', mm: 14.9, px: 75 },
     { size: '4.5', mm: 15.3, px: 79 },
@@ -278,45 +247,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 9. Selector de Tallas en Fichas de Producto
+  // 7. Selector de Tallas en Fichas de Producto
   document.querySelectorAll('.size-pill').forEach(pill => {
     pill.addEventListener('click', () => {
       const parent = pill.closest('.size-selector-grid');
       if (!parent) return;
       parent.querySelectorAll('.size-pill').forEach(p => p.classList.remove('selected'));
       pill.classList.add('selected');
-      
-      // Actualizar botón de WhatsApp del producto si existe
-      const productCard = pill.closest('.product-detail-info') || pill.closest('.product-card');
-      const waBtn = productCard?.querySelector('.btn-whatsapp-product');
-      if (waBtn) {
-        waBtn.dataset.size = pill.textContent.trim();
-      }
     });
   });
 
-  // 10. Filtrado de Categorías por Pestañas
-  const tabButtons = document.querySelectorAll('.tab-btn');
-  const productCards = document.querySelectorAll('.product-card');
-
-  tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const category = btn.dataset.category;
-
-      productCards.forEach(card => {
-        if (category === 'all' || card.dataset.category === category) {
-          card.style.display = 'flex';
-          card.style.animation = 'slideInToast 0.4s ease';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
-
-  // 11. Notificaciones Toast
+  // 8. Notificaciones Toast
   function showToast(message) {
     if (!toastContainer) return;
     const toast = document.createElement('div');
@@ -333,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.showToast = showToast;
 
-  // 12. Wishlist Toggle
+  // 9. Wishlist Toggle
   window.toggleWishlist = function(id, title) {
     const idx = wishlist.indexOf(id);
     if (idx > -1) {

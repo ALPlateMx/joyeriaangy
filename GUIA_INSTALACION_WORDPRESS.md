@@ -1,6 +1,6 @@
 # 💍 Guía de Instalación y Configuración: Joyería Angy para WordPress & WooCommerce
 
-¡Bienvenido al tema oficial de **Joyería Angy**! Este tema fue desarrollado específicamente para marcas de joyería fina de **Plata Ley .925** y **Acero Inoxidable / Quirúrgico 316L**, con enfoque en diseño de lujo, alta conversión e-commerce, integración de compras por WhatsApp y medidor virtual interactivo de tallas de anillos.
+¡Bienvenido al tema oficial de **Joyería Angy**! Este tema fue desarrollado específicamente para marcas de joyería fina de **Plata Ley .925** y **Acero Inoxidable / Quirúrgico 316L**, con enfoque en diseño de lujo, alta conversión e-commerce, integración de compras por WhatsApp, medidor virtual interactivo de tallas y **módulo integral de control de inventario**.
 
 ---
 
@@ -8,8 +8,9 @@
 
 1. **Archivo Instalable ZIP**: `joyeria-angy-tema-wordpress.zip` (Listo para subir desde el panel de WordPress).
 2. **Carpeta Fuente del Tema**: `wp-content/themes/joyeria-angy/` (Para subir por FTP o modificar código).
-3. **Prototipo Interactivo en Vivo**: `preview/index.html` (Para visualizar y probar la tienda inmediatamente en cualquier navegador sin necesidad de servidor).
-4. **Activos Gráficos de Alta Resolución**: `assets/images/` (Fotografía de estudio para anillos, collares, pulseras, aretes, dúos de pareja y empaques con certificado de autenticidad).
+3. **Prototipo Interactivo en Vivo**: `preview/index.html` (Para visualizar, probar la tienda y administrar el inventario inmediatamente en cualquier navegador sin servidor).
+4. **Módulo de Administración & ERP**: Gestión de productos, SKU, costos, stock, alertas de stock bajo y exportación JSON.
+5. **Activos Gráficos de Alta Resolución**: `assets/images/` (Fotografía de estudio para anillos, collares, pulseras, aretes, dúos de pareja y empaques con certificado de autenticidad).
 
 ---
 
@@ -31,9 +32,28 @@
 
 ---
 
-## 🔌 3. Plugins Recomendados para Máximo Rendimiento
+## 💎 3. Módulo de Administración de Productos e Inventario
 
-Para aprovechar todas las capacidades de venta y automatización:
+### En WordPress (`wp-admin`):
+- Ve al menú lateral izquierdo: **Joyería Inventario**.
+- Podrás monitorear de un vistazo:
+  - Total de modelos registrados.
+  - Piezas totales en existencia.
+  - Alertas automáticas de stock bajo (≤ 3 unidades) para reordenar con tus plateros.
+  - Actualización rápida de existencias por SKU.
+
+### En la Demostración Interactiva (`preview/index.html`):
+- Haz clic en el botón **"7. Admin & Inventario"** en la barra superior o en el enlace del menú/footer.
+- **Acciones Disponibles**:
+  - ➕ **Agregar Nueva Joya**: Registra título, SKU, categoría, metal/pureza, precio, precio regular, stock inicial y foto.
+  - ✏️ **Editar / Eliminar**: Modifica cualquier parámetro en tiempo real.
+  - ⚡ **Control de Stock Rápido**: Botones `+` y `-` para modificar existencias con 1 clic.
+  - 📊 **Métricas KPI**: Valuación total del inventario en pesos mexicanos ($ MXN), piezas disponibles y alertas.
+  - 📁 **Exportar Inventario**: Descarga en formato `.json` para respaldo y auditoría.
+
+---
+
+## 🔌 4. Plugins Recomendados para Máximo Rendimiento
 
 | Plugin | Propósito | Configuración Recomendada |
 | :--- | :--- | :--- |
@@ -45,48 +65,24 @@ Para aprovechar todas las capacidades de venta y automatización:
 
 ---
 
-## ⚙️ 4. Personalización del Tema (Theme Customizer)
+## ⚙️ 5. Personalización del Tema (Theme Customizer)
 
 Ve a **Apariencia > Personalizar > Opciones de Joyería Angy**:
 
-1. **Número de WhatsApp**:
-   - Ingresa el número con el código de país (ejemplo: `5215512345678` para México).
-   - Esto configurará automáticamente los botones de **"Pedir por WhatsApp"**, el carrito y el botón flotante.
-2. **Barra de Anuncios Superior**:
-   - Personaliza el mensaje promocional (ejemplo: `✨ Envío Gratis en compras mayores a $1,499 MXN | Plata Ley .925 Garantizada`).
-3. **Monto Mínimo de Envío Gratis**:
-   - Ajusta el valor para que la barra de progreso del carrito incentive la compra cruzada (por defecto `$1,499 MXN`).
-4. **Logotipo de la Joyería**:
-   - Ve a **Apariencia > Personalizar > Identidad del sitio** y sube tu logotipo en formato PNG transparente o SVG.
-
----
-
-## 💍 5. Funcionalidades Exclusivas de Joyería Angy
-
-### A. Medidor Virtual de Anillos (Ring Sizer)
-- Funciona automáticamente mediante el botón de regla en la cabecera y fichas de anillos.
-- Si deseas insertarlo en cualquier página o entrada de blog, utiliza el shortcode:
-  ```
-  [joyeria_ring_sizer]
-  ```
-
-### B. Botón de Compra Directa por WhatsApp con Mensaje Pre-cargado
-- Cuando un cliente hace clic en el botón de WhatsApp de cualquier joya o desde el carrito de compras, se genera un mensaje formal y ordenado con:
-  - Nombre del modelo.
-  - Talla seleccionada (ej. Talla 7).
-  - Precio unitario y total en pesos mexicanos ($ MXN).
-  - Mención de Plata Ley .925 y empaque de regalo.
-
-### C. Ficha de Garantía y Cuidados de la Plata
-- Se incorpora automáticamente en la pestaña de especificaciones de producto de WooCommerce, educando al cliente sobre la pureza del quintado .925 y los cuidados preventivos para evitar la sulfuración.
+1. **Número de WhatsApp**: Ingresa tu número con código de país (ej: `5215512345678`).
+2. **Barra de Anuncios Superior**: Personaliza el texto promocional.
+3. **Monto Mínimo para Envío Gratis**: Por defecto `$1,499 MXN`.
+4. **Logotipo de la Joyería**: En **Identidad del sitio**.
 
 ---
 
 ## 🖥️ 6. Cómo Probar la Vista Previa Inmediata
 
-Puedes abrir el archivo [preview/index.html](file:///c:/Users/wendy/OneDrive/Documentos/IGR/ConquerBloks/Antigravity/joyeriaangy/preview/index.html) en tu navegador favorito (Google Chrome, Microsoft Edge, Safari o Firefox) para navegar por:
-- La página de **Inicio** con banners dinámicos y sellos de calidad.
-- El **Catálogo** interactivo con filtros de joyas por categoría.
-- La **Ficha de Producto** con selector de talla y cálculo de envío.
-- El **Medidor de Tallas** interactivo con escala milimétrica.
-- La **Guía de Cuidado de la Plata** y la página de **Contacto & Mayoreo**.
+Abre el archivo [preview/index.html](file:///c:/Users/wendy/OneDrive/Documentos/IGR/ConquerBloks/Antigravity/joyeriaangy/preview/index.html) en tu navegador favorito:
+- **1. Inicio (Home)**: Banners dinámicos, sellos de autenticidad y catálogo en vivo.
+- **2. Catálogo**: Filtros por categoría y ordenamiento.
+- **3. Ficha de Producto**: Selector de talla, cálculo de stock y compra por WhatsApp.
+- **4. Medidor de Tallas**: Calibrador virtual interactivo.
+- **5. Cuidados**: Guía para evitar la sulfuración de la plata .925.
+- **6. Contacto & Mayoreo**: Formulario y cotizaciones.
+- **7. Admin & Inventario**: Panel ERP interactivo para alta y control de existencias.
