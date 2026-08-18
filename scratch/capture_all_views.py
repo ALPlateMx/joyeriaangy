@@ -4,7 +4,7 @@ import re
 
 base_dir = r"c:\Users\wendy\OneDrive\Documentos\IGR\ConquerBloks\Antigravity\joyeriaangy"
 views_dir = os.path.join(base_dir, "scratch", "views")
-output_dir = os.path.join(base_dir, "capturas_pantallas")
+output_dir = os.path.join(base_dir, "captura de pantalla")
 os.makedirs(views_dir, exist_ok=True)
 os.makedirs(output_dir, exist_ok=True)
 
